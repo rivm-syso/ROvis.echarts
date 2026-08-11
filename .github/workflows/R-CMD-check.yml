@@ -46,7 +46,7 @@ jobs:
   lint:
     runs-on: ubuntu-latest
     container:
-      image: daratools/darabase:latest
+      image: daratools/robase:latest
 
     permissions:
       contents: write
