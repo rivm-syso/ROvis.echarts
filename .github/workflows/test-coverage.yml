@@ -16,7 +16,7 @@ jobs:
       contents: write
 
     env:
-      GITHUB_PAT: ${{ secrets.AT_ROvis2 || secrets.GITHUB_TOKEN }}
+      GITHUB_PAT: ${{ secrets.AT_ROvis || secrets.GITHUB_TOKEN }}
 
     steps:
       - name: Checkout repository
