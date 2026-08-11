@@ -11,13 +11,13 @@ Imports:
     htmlwidgets (>= 1.6.4),
     jsonlite (>= 2.0.0),
     magrittr (>= 2.0.3),
-    quarto (>= 1.4),
     rlang (>= 1.1.0),
     ROvis.utils
 Suggests: 
     covr (>= 3.6.4),
     knitr (>= 1.51),
     pkgdown (>= 2.0.9),
+    quarto (>= 1.4),
     rmarkdown (>= 1.51),
     testthat (>= 3.0.0)
 Depends:
