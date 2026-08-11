@@ -78,7 +78,9 @@ ro_e_theme <- function(
   )
 
   palette_colors <- unname(ro_color_palette(palette))
-  font_family <- ro_check_if_font_available(font %||% "RijksoverheidSansWebText")
+  font_family <- ro_check_if_font_available(
+    font %||% "RijksoverheidSansWebText"
+  )
 
   series <- e$x$opts$series %||% list()
 
@@ -339,7 +341,11 @@ ro_e_theme_list <- function(palette, font_family) {
       axisPointer = list(
         type = "line",
         axis = "x",
-        lineStyle = list(color = ro_color("grijs_7"), type = "dashed", width = 1)
+        lineStyle = list(
+          color = ro_color("grijs_7"),
+          type = "dashed",
+          width = 1
+        )
       )
     ),
 

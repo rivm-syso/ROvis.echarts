@@ -1,6 +1,5 @@
 # Internal helpers ---------------------------------------------------------
 
-
 #' Generates the JavaScript snippet for legend-toggle keyboard navigation.
 #'
 #' One JS line is emitted per entry in series_keys.
