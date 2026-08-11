@@ -28,20 +28,29 @@ jobs:
       - name: Install system dependencies
         run: |
           apt-get update -qq
-          apt-get install -y --no-install-recommends qpdf
+          apt-get install -y --no-install-recommends qpdf libcurl4-openssl-dev libssl-dev libxml2-dev git
 
       # No setup-r step needed — R is already installed in your Docker image
-      - name: Setup R dependencies
-        uses: r-lib/actions/setup-r-dependencies@v2
-        with:
-          extra-packages: any::rcmdcheck
-          needs: check
+      - name: Install R package helpers
+        run: |
+          install.packages(c("remotes", "rcmdcheck"), repos = "https://cloud.r-project.org")
+        shell: Rscript {0}
+
+      - name: Install package dependencies with remotes
+        env:
+          GITHUB_PAT: ${{ secrets.AT_ROvis || secrets.GITHUB_TOKEN }}
+        run: |
+          remotes::install_deps(dependencies = TRUE, upgrade = "never")
+        shell: Rscript {0}
 
       - name: Run R CMD CHECK
-        uses: r-lib/actions/check-r-package@v2
-        with:
-          upload-snapshots: true
-          build_args: 'c("--no-manual","--compact-vignettes=gs+qpdf")'
+        run: |
+          rcmdcheck::rcmdcheck(
+            args = c("--no-manual", "--compact-vignettes=gs+qpdf"),
+            error_on = "error",
+            check_dir = "check"
+          )
+        shell: Rscript {0}
 
   lint:
     runs-on: ubuntu-latest
@@ -66,9 +75,8 @@ jobs:
         run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
 
       - name: Install lintr
-        # Added install to negate the linter from going of in the man pages.
         run: |
-          install.packages("lintr")
+          install.packages("lintr", repos = "https://cloud.r-project.org")
         shell: Rscript {0}
 
       - name: Run lintr
@@ -99,12 +107,13 @@ jobs:
           else
             COLOR="red"; MESSAGE="${N} issues"
           fi
+
           mkdir -p /tmp/badge-output
           printf '{\n  "schemaVersion": 1,\n  "label": "lintr",\n  "message": "%s",\n  "color": "%s"\n}\n' \
             "$MESSAGE" "$COLOR" > /tmp/badge-output/lint.json
           echo "Lint badge: ${MESSAGE} (${COLOR})"
 
-          git config user.name  "github-actions[bot]"
+          git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
           git fetch origin gh-pages 2>/dev/null || true
