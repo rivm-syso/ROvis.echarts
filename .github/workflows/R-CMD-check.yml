@@ -40,7 +40,7 @@ jobs:
         env:
           GITHUB_PAT: ${{ secrets.AT_ROvis || secrets.GITHUB_TOKEN }}
         run: |
-          remotes::install_deps(dependencies = TRUE, upgrade = "never")
+          remotes::install_github(repo = "rivm-syso/ROvis.utils")
         shell: Rscript {0}
 
       - name: Run R CMD CHECK
