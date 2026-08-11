@@ -1,0 +1,52 @@
+name: pkgdown
+
+on:
+  push:
+    branches: [main, master]
+  release:
+    types: [published]
+  workflow_dispatch:
+
+# Required for deploying to GitHub Pages
+permissions:
+  contents: write
+  pages:    write
+
+jobs:
+  pkgdown:
+    runs-on: ubuntu-latest
+    container:
+      image: daratools/darabase:latest
+
+    env:
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # rocker/tidyverse runs as root; mark the workspace as safe for git
+      - name: Fix git safe directory
+        run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
+
+      # No setup-r step needed — R is already installed in your Docker image
+
+      - name: Setup pandoc
+        uses: r-lib/actions/setup-pandoc@v2
+
+      - name: Setup R dependencies
+        uses: r-lib/actions/setup-r-dependencies@v2
+        with:
+          extra-packages: any::pkgdown, local::.
+          needs: website
+
+      - name: Build pkgdown site
+        run: pkgdown::build_site_github_pages(new_process = FALSE, install = FALSE)
+        shell: Rscript {0}
+
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          clean:  false          # keeps the badges/ folder written by the coverage job
+          branch: gh-pages
+          folder: docs
