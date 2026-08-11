@@ -1,0 +1,21 @@
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+
+# do not track these folders
+tests/testthat/outputs/*
+logs/*
+
+# do not track these files
+*.html
+*.log
+
+inst/doc
+docs/*
+public/*
+
+.DS_Store
+*.Rcheck/
+*.tar.gz
+.positai
