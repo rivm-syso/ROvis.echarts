@@ -1,0 +1,31 @@
+Package: ROvis.echarts
+Title: Rijksoverheid Visualisatie - echarts
+Version: 0.1.0.9000
+Authors@R: person("ROvisteam", email = "spin@rivm.nl", role = c("cre", "aut"))
+Description: ROvis.echarts is an R package that provides a comprehensive suite of functions for making echart plots in rijksoverheid style.
+License: Apache License (>= 2)
+Imports: 
+    cli,
+    dplyr (>= 1.1.4),
+    echarts4r,
+    htmlwidgets (>= 1.6.4),
+    jsonlite (>= 2.0.0),
+    magrittr (>= 2.0.3),
+    rlang (>= 1.1.0),
+    ROvis.utils
+Suggests: 
+    covr (>= 3.6.4),
+    knitr (>= 1.51),
+    pkgdown (>= 2.0.9),
+    quarto (>= 1.4),
+    rmarkdown (>= 1.51),
+    testthat (>= 3.0.0)
+Depends:
+    R (>= 4.3.0)
+Remotes:
+    gitlab@gitlab.rivm.nl::SPIN/ROvis.utils@develop
+VignetteBuilder: knitr
+Config/testthat/edition: 3
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 8.0.0
