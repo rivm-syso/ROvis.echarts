@@ -13,7 +13,7 @@ jobs:
       image: daratools/robase:latest
 
     env:
-      GITHUB_PAT: ${{ secrets.AT_ROvis || secrets.GITHUB_TOKEN }}
+      GITHUB_PAT: ${{ secrets.AT_ROvis2 || secrets.GITHUB_TOKEN }}
       R_KEEP_PKG_SOURCE: yes
 
     steps:
