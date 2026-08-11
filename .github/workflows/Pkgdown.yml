@@ -19,7 +19,7 @@ jobs:
       image: daratools/robase:latest
 
     env:
-      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+      GITHUB_PAT: ${{ secrets.AT_ROvis || secrets.GITHUB_TOKEN }}
 
     steps:
       - name: Checkout repository
