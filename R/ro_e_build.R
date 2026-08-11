@@ -72,11 +72,11 @@ ro_e_build_keyboard_nav_js <- function(axis_js, legend_js) {
 #' @family echarts4r
 #' @return A JavaScript string for htmlwidgets::onRender().
 ro_e_build_onrender_js <- function(
-    colors,
-    series_names,
-    font_family,
-    name_color,
-    fixed_aspect = TRUE
+  colors,
+  series_names,
+  font_family,
+  name_color,
+  fixed_aspect = TRUE
 ) {
   colors_json <- jsonlite::toJSON(colors, auto_unbox = FALSE)
   names_json <- jsonlite::toJSON(series_names, auto_unbox = FALSE)

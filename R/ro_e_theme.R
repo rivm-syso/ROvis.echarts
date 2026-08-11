@@ -63,11 +63,11 @@
 #' @family echarts4r
 #' @export
 ro_e_theme <- function(
-    e,
-    palette = "categorical",
-    fixed_aspect = TRUE,
-    font = NULL,
-    renderer = "svg"
+  e,
+  palette = "categorical",
+  fixed_aspect = TRUE,
+  font = NULL,
+  renderer = "svg"
 ) {
   renderer <- arg_match(renderer, c("svg", "canvas"))
   e$x$renderer <- renderer
@@ -91,9 +91,9 @@ ro_e_theme <- function(
   yaxis <- e$x$opts$yAxis
   if (
     any(series_types == "bar") &&
-    length(xaxis) > 0 &&
-    identical(xaxis[[1]]$type, "value") &&
-    !(length(yaxis) > 0 && identical(yaxis[[1]]$type, "category"))
+      length(xaxis) > 0 &&
+      identical(xaxis[[1]]$type, "value") &&
+      !(length(yaxis) > 0 && identical(yaxis[[1]]$type, "category"))
   ) {
     cli_warn(c(
       "!" = "The x-axis variable is numeric, which creates a continuous axis.",
