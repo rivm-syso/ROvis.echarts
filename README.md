@@ -4,7 +4,7 @@
 [![Coverage](https://img.shields.io/endpoint?url=https://rivm-syso.github.io/ROvis.echarts/badges/coverage.json)](https://github.com/rivm-syso/ROvis.echarts/actions/workflows/ci.yaml)
 <!-- badges: end -->
 
-# ROvis.echarts
+# ROvis.echarts <a href="https://github.com/rivm-syso/ROvis.echarts"><img src="man/figures/logo.png" align="right" height="138" /></a>
 
 ## Rijksoverheid Visualisatie - echarts
 
