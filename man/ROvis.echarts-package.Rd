@@ -6,6 +6,8 @@
 \alias{ROvis.echarts-package}
 \title{ROvis.echarts: Rijksoverheid Visualisatie - echarts}
 \description{
+\if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
+
 ROvis.echarts is an R package that provides a comprehensive suite of functions for making echart plots in rijksoverheid style.
 }
 \author{
