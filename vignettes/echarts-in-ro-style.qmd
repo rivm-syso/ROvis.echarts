@@ -6,7 +6,7 @@ output:
   tabset: TRUE
 vignette: >
   %\VignetteIndexEntry{ECharts in RO style}
-  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEngine{quarto::html}
   %\VignetteEncoding{UTF-8}
 ---
 

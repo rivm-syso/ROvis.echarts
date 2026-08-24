@@ -4,18 +4,18 @@
 \name{ROvis.echarts-package}
 \alias{ROvis.echarts}
 \alias{ROvis.echarts-package}
-\title{ROvis.echarts: Rijksoverheid Visualisatie - echarts}
+\title{ROvis.echarts: Accessible Echarts With Rijksoverheid Styling}
 \description{
 \if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
 
 ROvis.echarts is an R package that provides a comprehensive suite of functions for making echart plots in rijksoverheid style.
 }
 \author{
-\strong{Maintainer}: ROvisteam \email{spin@rivm.nl}
+\strong{Maintainer}: ROvis team \email{spin@rivm.nl}
 
 Authors:
 \itemize{
-  \item ROvisteam \email{spin@rivm.nl}
+  \item ROvis team \email{spin@rivm.nl}
 }
 
 }
