@@ -2,7 +2,7 @@ Package: ROvis.echarts
 Title: Accessible Echarts With Rijksoverheid Styling
 Version: 0.1.0.9000
 Authors@R: person("ROvis team", email = "spin@rivm.nl", role = c("cre", "aut"))
-Description: ROvis.echarts is an R package that provides a comprehensive suite of functions for making echart plots in rijksoverheid style.
+Description: Provides accessible, Echart plots and themed visualizations with Rijksoverheid styling.
 License: Apache License (>= 2)
 Imports: 
     cli,
