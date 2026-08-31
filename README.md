@@ -14,12 +14,11 @@ ROvis.echarts is an R package that provides a comprehensive suite of functions f
 ## Installation
 
 ```r
-# Install from GitLab
-# install.packages("devtools")
-devtools::install_gitlab("spin/ROvis.echarts/ROvis.echarts", host = "gitlab.rivm.nl")
+# Install from GitHub (private repo - requires GitHub auth, e.g. a PAT
+# via usethis::create_github_token() / gitcreds, since this repo is private)
+# install.packages("remotes")
+remotes::install_github("rivm-syso/ROvis.echarts")
 ```
-
-For more information, check out the [wiki page about daratools](https://gitlab.rivm.nl/dara/wiki/-/wikis/DARAtools).
 
 
 ## Usage
@@ -36,9 +35,8 @@ First point of contact for questions: ROvisteam (spin@rivm.nl)
 
 ## Instructions for developers 
 
-Check out the [wiki page about r packages](https://gitlab.rivm.nl/dara/wiki/-/wikis/DARAtools) 
-for elaborate information about R package development. Below we describe the most important 
-guidelines and practicalities.
+Below we describe the most important guidelines and practicalities for R package
+development on this project.
 
 
 ### Requirements
@@ -67,8 +65,7 @@ To ensure code standardization and quality, follow these guidelines:
 the `min_version` argument to specify a minimum version. 
 - Add a new function dependency to the NAMESPACE with `usethis::use_import_from()`
 - Add documentation to new functions by inserting a roxygen skeleton and use `devtools::document()` to
-create automatic documentation in the `man` folder, for more information check out this 
-[wiki section](https://gitlab.rivm.nl/dara/wiki/-/wikis/Create%20your%20own%20R%20packages#documentation)
+create automatic documentation in the `man` folder
 
 ## Authors and acknowledgment
 This R packages was created by ROvisteam (spin@rivm.nl).
