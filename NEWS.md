@@ -1,4 +1,4 @@
-# ROvis.echarts v0.1.0.9000
+# ROvis.echarts v0.1.0
 
 First release since `ROvis.echarts` was split out of the `ROvis` monolith into its own
 package, and the repository moved from GitLab to GitHub.
