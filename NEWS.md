@@ -1,22 +1,16 @@
-List all changes in chronological order (new -> old ) to the package here. After release, write release notes and/or a blogpost for the package mailing list and/or pkg down website. This NEWS.md file will be visible in the pkg down website under News > Changelog.
+# ROvis.echarts v0.1.0.9000
 
-We have chosen to include the headers "Added", "Changed", "Fixed", and "Deprecated". You are free to change these.
-
-GitLab issue numbers are mentioned where applicable.
-
-Sentences start with a capital letter and end with a point.
-
-Use '-' before each entry.
-
-Follow guidelines in documentation of pkgdown::build_news() for version headings. 
-
-# ROvis.echarts v0.0.0.9000
+First release since `ROvis.echarts` was split out of the `ROvis` monolith into its own
+package, and the repository moved from GitLab to GitHub.
 
 ### :sparkles: Added
 
+- Moved the echarts4r functions from ROvis: `ro_e_keyboard_nav`, `ro_e_theme`.
+
 ### :hammer_and_wrench: Changed
+
+- Migrated the repository from GitLab to GitHub (`rivm-syso/ROvis.echarts`).
 
 ### :bug: Fixed 
 
 ### :coffin: Deprecated
-
