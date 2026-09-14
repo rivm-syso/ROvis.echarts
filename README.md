@@ -9,7 +9,7 @@
 ## Rijksoverheid Visualisatie - echarts
 
 ## Description
-ROvis.echarts is an R package that provides a comprehensive suite of functions for making echart plots in rijksoverheid style.
+A tool to uniformly visualise graphs in 'echarts4r' using standardized Rijksoverheid (Dutch National Government) styling. This package is part of the [ROvis umbrella package] (https://github.com/rivm-syso/ROvis).
 
 ## Installation
 
@@ -22,22 +22,27 @@ remotes::install_github("rivm-syso/ROvis.echarts")
 
 
 ## Usage
-*Use examples liberally, and show the expected output if you can. It's helpful to have the smallest example of usage that you can demonstrate inline, while providing links to more sophisticated examples if they are too long to reasonably include in the README.*
+
+```r
+library(ROvis.echarts)
+
+mtcars |>
+  e_charts(wt) |>
+  e_scatter(mpg) |>
+  ro_e_theme()
+
+```
 
 ## Support
 First point of contact for questions: ROvisteam (spin@rivm.nl)
 
-## Roadmap
-*If you have ideas for releases in the future, it is a good idea to list them in the README.*
-
 ## Contributing
-*State if you are open to contributions and what your requirements are for accepting them.*
+We welcome contributions and are always happy to see people help improve this package. If you would like to contribute, please first open an issue to describe the bug, feature, or proposed change. Once you are ready, submit a pull request linked to that issue. All contributions will be reviewed by the SPIN team before they are merged.
 
 ## Instructions for developers 
 
-Below we describe the most important guidelines and practicalities for R package
-development on this project.
-
+For information about R package development, check the [R Packages book](https://r-pkgs.org/). 
+Below we describe the most important guidelines and practicalities.
 
 ### Requirements
 We use the `testthat`, `lintr` and `roxygen2` package for development of tests, code style 
@@ -68,7 +73,7 @@ the `min_version` argument to specify a minimum version.
 create automatic documentation in the `man` folder
 
 ## Authors and acknowledgment
-This R packages was created by ROvisteam (spin@rivm.nl).
+This R package was created by ROvis team (spin@rivm.nl).
 
 ## License
-*For open source projects, indicate how it is licensed.*
+This package uses an Apache license.
