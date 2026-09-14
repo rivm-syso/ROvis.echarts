@@ -1,6 +1,6 @@
 Package: ROvis.echarts
 Title: Accessible Echarts With Rijksoverheid Styling
-Version: 0.1.0.9000
+Version: 0.1.0
 Authors@R: person("ROvis team", email = "spin@rivm.nl", role = c("cre", "aut"))
 Description: Provides accessible, Echart plots and themed visualizations with Rijksoverheid styling.
 License: Apache License (>= 2)
