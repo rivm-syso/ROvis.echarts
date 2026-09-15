@@ -16,6 +16,12 @@ knitr::opts_chunk$set(echo = TRUE, fig.width = 8, fig.height = 5)
 
 This vignette covers the `echarts4r` functions in `ROvis`: `ro_e_theme()` and `ro_e_keyboard_nav()`. Together they let you build interactive charts that follow the Rijksoverheid (RO) visual style. If you are new to `echarts4r`, we recommend checking out the [echarts4r documentation](https://echarts4r.john-coene.com/) first.
 
+::: {.callout-note}
+## Important
+
+In this vignette, the examples specifically follow the style guidelines of the National Institue for Public Health and the Envrionment (RIVM).
+:::
+
 ## Setup
 
 Load the packages we need:
