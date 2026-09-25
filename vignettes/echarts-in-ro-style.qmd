@@ -138,7 +138,7 @@ dat_cases |>
   e_x_axis(name = "Age class") |>
   e_y_axis(name = "Value") |>
   e_tooltip(trigger = "axis") |>
-  ro_e_theme(palette = "gender_con")
+  ro_e_theme(palette = "gender_con", stijl = "cbs")
 ```
 
 ### Horizontal bar chart
@@ -169,7 +169,7 @@ dat_weekly |>
   e_x_axis(name = "Week") |>
   e_y_axis(name = "Value") |>
   e_tooltip(trigger = "axis") |>
-  ro_e_theme(palette = "gender_con")
+  ro_e_theme(palette = "gender_con", stijl = "cbs")
 ```
 
 A note on x-axis variable types: if your x-axis variable is numeric (like a year or week number), `echarts4r` treats it as a value axis. The RO theme shows grid lines on all value axes, so you will end up with vertical grid lines as well as horizontal ones. To avoid this, make the x-axis variable a factor with explicit levels. That way `echarts4r` uses a category axis, which has no grid lines, while the order of the values stays correct. For example, we achieved this by:

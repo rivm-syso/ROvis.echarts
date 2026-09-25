@@ -67,17 +67,18 @@ ro_e_theme <- function(
   palette = "categorical",
   fixed_aspect = TRUE,
   font = NULL,
-  renderer = "svg"
+  renderer = "svg",
+  stijl = "rivm"
 ) {
   renderer <- arg_match(renderer, c("svg", "canvas"))
   e$x$renderer <- renderer
 
-  palette <- arg_match(
-    palette,
-    c("categorical", "full", "gender_con", "gender_unc", "greys")
-  )
-
-  palette_colors <- unname(ro_color_palette(palette))
+  # palette <- arg_match(
+  #   palette,
+  #   c("categorical", "full", "gender_con", "gender_unc", "greys")
+  # )
+  #
+  # palette_colors <- unname(ro_color_palette(palette))
   font_family <- ro_check_if_font_available(
     font %||% "RijksoverheidSansWebText"
   )
@@ -109,10 +110,15 @@ ro_e_theme <- function(
   )
   series_names <- series_names[nzchar(series_names)]
 
-  theme <- ro_e_theme_list(palette, font_family)
-  tmp <- tempfile(fileext = ".json")
-  jsonlite::write_json(theme, tmp, auto_unbox = TRUE)
-  e <- e_theme_custom(e, tmp)
+  # theme <- ro_e_theme_list(palette, font_family)
+  # tmp <- tempfile(fileext = ".json")
+  # jsonlite::write_json(theme, tmp, auto_unbox = TRUE)
+
+  # style <- "inst/extdata/rivm.json"
+  style <- system.file("extdata", paste0(stijl, ".json"), package = "ROvis.echarts")
+  palette_colors <- jsonlite::read_json(style)$color |> unlist()
+
+  e <- e_theme_custom(e, style)
   onRender(
     e,
     ro_e_build_onrender_js(
