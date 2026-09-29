@@ -134,7 +134,7 @@ dat_cases |>
   group_by(sex) |>
   e_charts(agegroup) |>
   e_bar(n) |>
-  e_title("Cases by age group and sex") |>
+  e_title("Cases by age group and sex", subtext = "year") |>
   e_x_axis(name = "Age class") |>
   e_y_axis(name = "Value") |>
   e_tooltip(trigger = "axis") |>
@@ -226,6 +226,22 @@ tab_cases_week_by_prov |>
   e_tooltip(trigger = "item") |>
   ro_e_theme()
 ```
+### Choropleet
+```{r choropleet}
+geojson <- jsonlite::read_json("../inst/extdata/provincie_2026.geojson")
+dataset <- data.frame(
+  statcode = paste0("PV", 20:31)
+  , value = as.numeric(sample(1:12))
+)
+
+dataset |> 
+  e_charts(statcode) |> 
+  e_map_register("provincie", geojson) |> 
+  e_map(value, map = "provincie", nameProperty = "statcode") |> # define region id (nameProperty) for joining.
+  e_visual_map(value, inRange = list(color = cbs_green_5)) |>
+  ro_e_theme()
+```
+
 
 ## Aspect ratio
 
@@ -366,4 +382,5 @@ dat_cases |>
   ro_e_theme() |>
   ro_e_keyboard_nav()
 ```
+
 
