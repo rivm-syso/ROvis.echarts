@@ -92,6 +92,7 @@ cbs_purple_7 <- cbs_purple
 cbs_purple_5 <- cbs_purple[2:6]
 
 cbs_grey <- "#e5e5e5"
+cbs_axis <- "#777777"
 
 font_title <- "Soho W01 Medium, Cambria, serif"
 font_text <- "Akko W01 Regular, Cambria Light, sans-serif"
@@ -107,8 +108,8 @@ list(
   )
 
   , title = list(
-    left = "left",
-    textStyle = list(
+    left = "left"
+    , textStyle = list(
       fontFamily = font_title
       , color = css_color$web_text
       , fontSize = 17
@@ -118,6 +119,156 @@ list(
       , fontSize = 12
     )
   )
+
+  # --- Axis styles ----------------------------------------------------
+  # Category axis (x-axis for column/line; y-axis for bar after e_flip_coords()).
+  , categoryAxis = list(
+    axisLine = list(
+      show = TRUE
+      , lineStyle = list(color = cbs_axis, width = 1.5)
+    )
+    , axisTick = list(
+      show = TRUE
+      , lineStyle = list(color = cbs_axis, width = 1.5)
+      , length = 4
+    )
+    , axisLabel = list(
+      show = TRUE
+      , color = css_color$web_text
+      , fontSize = 12
+    )
+    , nameLocation = "end"
+    , nameGap = 0
+    # verticalAlign "top" anchors the bounding box at the axis line; padding pushes text below labels
+    # axisLabel.margin (8) + axisLabel fontSize (12) + 5px offset = 25
+    , nameTextStyle = list(
+      fontSize = 13
+      , color = css_color$web_text
+      , align = "right"
+      , verticalAlign = "top"
+      , padding = c(25, 0, 0, 0)
+    )
+    , splitLine = list(show = FALSE)
+    , splitArea = list(show = FALSE)
+  )
+
+  # Value axis (y-axis for column/line; x-axis for bar after e_flip_coords()).
+  , valueAxis = list(
+    axisLine = list(show = FALSE)
+    , axisTick = list(show = FALSE)
+    , axisLabel = list(show = TRUE, color = css_color$web_text, fontSize = 12)
+    , nameLocation = "end"
+    , nameGap = 9
+    , nameRotate = 0
+    , nameTextStyle = list(
+      fontSize = 13
+      , color = css_color$web_text
+      , align = "left"
+    )
+    , splitLine = list(
+      show = TRUE
+      , lineStyle = list(color = cbs_axis, width = 0.25)
+    )
+    , splitArea = list(show = FALSE)
+  )
+
+  # Time axis: same axis line / tick / split style as category axis.
+  , timeAxis = list(
+    axisLine = list(
+      show = TRUE
+      , lineStyle = list(color = cbs_axis, width = 1.5)
+    )
+    , axisTick = list(
+      show = TRUE
+      , lineStyle = list(color = cbs_axis, width = 1.5)
+      , length = 4
+    )
+    , axisLabel = list(show = TRUE, color = css_color$web_text, fontSize = 12)
+    , nameLocation = "end"
+    , nameGap = 0
+    , nameTextStyle = list(
+      fontSize = 13
+      , color = css_color$web_text
+      , align = "right"
+      , verticalAlign = "top"
+      , padding = c(25, 0, 0, 0)
+    )
+    , splitLine = list(show = FALSE)
+    , splitArea = list(show = FALSE)
+  )
+
+  # Log axis: same style as value axis.
+  , logAxis = list(
+    axisLine = list(show = FALSE)
+    , axisTick = list(show = FALSE)
+    , axisLabel = list(show = TRUE, color = css_color$web_text, fontSize = 12)
+    , nameLocation = "end"
+    , nameGap = 9
+    , nameRotate = 0
+    , nameTextStyle = list(
+      fontSize = 13
+      , color = css_color$web_text
+      , align = "left"
+    )
+    , splitLine = list(
+      show = TRUE
+      , lineStyle = list(color = cbs_axis, width = 0.25)
+    )
+    , splitArea = list(show = FALSE)
+  )
+
+
+  # --- Legend ---------------------------------------------------------
+  # Position (bottom) is the ECharts 6 default
+  , legend = list(
+    left = "8%"
+    , bottom = "1%"
+    , icon = "rect"
+    , itemWidth = 25
+    , itemHeight = 10
+    , itemStyle = list(borderWidth = 0)
+    , emphasis = list(
+      itemStyle = list(
+        borderWidth = 0
+        , borderRadius = 0
+      )
+      , label = list(fontWeight = "normal", color = css_color$web_text)
+    )
+    , inactiveStyle = list(
+      textStyle = list(color = "#c8c8c8")
+    )
+    , textStyle = list(color = css_color$web_text, fontSize = 13)
+  )
+
+
+  # --- Tooltip --------------------------------------------------------
+  , tooltip = list(
+    backgroundColor = "#ffffffE6"
+    , borderColor = css_color$web_text
+    , borderWidth = 0.5
+    , borderRadius = 0
+    , shadowBlur = 0
+    , shadowColor = "transparent"
+    , textStyle = list(
+      fontFamily = font_text
+      , fontSize = 13
+      , color = "#000000"
+      , fontWeight = "normal"
+    )
+    , axisPointer = list(
+      type = "line"
+      , axis = "x"
+      , lineStyle = list(
+        color = cbs_axis
+        , type = "dashed"
+        , width = 1
+      )
+    )
+  )
+
+
+
+
 
 
   # --- Series type defaults -------------------------------------------
@@ -172,149 +323,6 @@ list(
     , right = 10
   )
 
-  # --- Axis styles ----------------------------------------------------
-  # Category axis (x-axis for column/line; y-axis for bar after e_flip_coords()).
-  , categoryAxis = list(
-    axisLine = list(
-      show = TRUE
-      , lineStyle = list(color = ro_color("grijs_7"), width = 1.5)
-    )
-    , axisTick = list(
-      show = TRUE
-      , lineStyle = list(color = ro_color("grijs_7"), width = 1.5)
-      , length = 4
-    )
-    , axisLabel = list(
-      show = TRUE
-      , color = ro_color("grijs_7")
-      , fontSize = 12
-    )
-    , nameLocation = "end"
-    , nameGap = 0
-    # verticalAlign "top" anchors the bounding box at the axis line; padding pushes text below labels
-    # axisLabel.margin (8) + axisLabel fontSize (12) + 5px offset = 25
-    , nameTextStyle = list(
-      fontSize = 13
-      , color = css_color$web_text
-      , align = "right"
-      , verticalAlign = "top"
-      , padding = c(25, 0, 0, 0)
-    )
-    , splitLine = list(show = FALSE)
-    , splitArea = list(show = FALSE)
-  )
-
-  # Value axis (y-axis for column/line; x-axis for bar after e_flip_coords()).
-  , valueAxis = list(
-    axisLine = list(show = FALSE)
-    , axisTick = list(show = FALSE)
-    , axisLabel = list(show = TRUE, color = ro_color("grijs_7"), fontSize = 12)
-    , nameLocation = "end"
-    , nameGap = 9
-    , nameRotate = 0
-    , nameTextStyle = list(
-      fontSize = 13
-      , color = css_color$web_text
-      , align = "left"
-    )
-    , splitLine = list(
-      show = TRUE
-      , lineStyle = list(color = ro_color("grijs_8"), width = 0.25)
-    )
-    , splitArea = list(show = FALSE)
-  )
-
-  # Time axis: same axis line / tick / split style as category axis.
-  , timeAxis = list(
-    axisLine = list(
-      show = TRUE
-      , lineStyle = list(color = ro_color("grijs_7"), width = 1.5)
-    )
-    , axisTick = list(
-      show = TRUE
-      , lineStyle = list(color = ro_color("grijs_7"), width = 1.5)
-      , length = 4
-    )
-    , axisLabel = list(show = TRUE, color = ro_color("grijs_7"), fontSize = 12)
-    , nameLocation = "end"
-    , nameGap = 0
-    , nameTextStyle = list(
-      fontSize = 13
-      , color = css_color$web_text
-      , align = "right"
-      , verticalAlign = "top"
-      , padding = c(25, 0, 0, 0)
-    )
-    , splitLine = list(show = FALSE)
-    , splitArea = list(show = FALSE)
-  )
-
-  # Log axis: same style as value axis.
-  , logAxis = list(
-    axisLine = list(show = FALSE)
-    , axisTick = list(show = FALSE)
-    , axisLabel = list(show = TRUE, color = ro_color("grijs_7"), fontSize = 12)
-    , nameLocation = "end"
-    , nameGap = 9
-    , nameRotate = 0
-    , nameTextStyle = list(
-      fontSize = 13
-      , color = css_color$web_text
-      , align = "left"
-    )
-    , splitLine = list(
-      show = TRUE
-      , lineStyle = list(color = ro_color("grijs_8"), width = 0.25)
-    )
-    , splitArea = list(show = FALSE)
-  )
-
-  # --- Legend ---------------------------------------------------------
-  # Position (bottom) is the ECharts 6 default
-  , legend = list(
-    left = "8%"
-    , bottom = "1%"
-    , icon = "rect"
-    , itemWidth = 24
-    , itemHeight = 12
-    , itemStyle = list(borderWidth = 0)
-    , emphasis = list(
-      itemStyle = list(
-        borderWidth = 0
-        , borderRadius = 0
-      )
-      , label = list(fontWeight = "bold", color = ro_color("hemelblauw"))
-    )
-    , inactiveStyle = list(
-      textStyle = list(color = "#c8c8c8")
-    )
-    , textStyle = list(color = ro_color("grijs_7"), fontSize = 13)
-  )
-
-  # --- Tooltip --------------------------------------------------------
-  , tooltip = list(
-    backgroundColor = "#ffffff"
-    , borderColor = "#000000"
-    , borderWidth = 1
-    , borderRadius = 0
-    , shadowBlur = 0
-    , shadowColor = "transparent"
-    , textStyle = list(
-      fontFamily = font_text
-      , fontSize = 13
-      , color = "#000000"
-      , fontWeight = "normal"
-    )
-    , axisPointer = list(
-      type = "line"
-      , axis = "x"
-      , lineStyle = list(
-        color = ro_color("grijs_7")
-        , type = "dashed"
-        , width = 1
-      )
-    )
-  )
 
   # --- Toolbox --------------------------------------------------------
   , toolbox = list(iconStyle = list(borderColor = ro_color("grijs_7")))
