@@ -121,6 +121,7 @@ list(
   )
 
   # --- Axis styles ----------------------------------------------------
+
   # Category axis (x-axis for column/line; y-axis for bar after e_flip_coords()).
   , categoryAxis = list(
     axisLine = list(
@@ -156,7 +157,9 @@ list(
   , valueAxis = list(
     axisLine = list(show = FALSE)
     , axisTick = list(show = FALSE)
-    , axisLabel = list(show = TRUE, color = css_color$web_text, fontSize = 12)
+    , axisLabel = list(show = TRUE, color = css_color$web_text, fontSize = 12)#, formatter = htmlwidgets::JS(
+    #   "function(value) { return Number(value).toLocaleString('fr-FR'); }"
+    # ))
     , nameLocation = "end"
     , nameGap = 9
     , nameRotate = 0
@@ -321,10 +324,11 @@ list(
     top = 100
     , left = "left"
     , right = 10
+    , bottom = 10
   )
 
 
   # --- Toolbox --------------------------------------------------------
   , toolbox = list(iconStyle = list(borderColor = ro_color("grijs_7")))
 ) |>
-  jsonlite::write_json("inst/extdata/cbs.json", auto_unbox = TRUE)
+  jsonlite::write_json("inst/extdata/cbs.json", auto_unbox = TRUE, pretty = TRUE)
