@@ -183,7 +183,7 @@ For convenience, there will also be a warning displayed when you try to do so:
 
 ```{r numeric-axis}
 data_multi <- data.frame(
-  year = c(2020, 2021, 2022, 2023, 2024),
+  year = as.character(c(2020, 2021, 2022, 2023, 2024)),
   women = c(120, 145, 160, 175, 190),
   men = c(95, 110, 125, 140, 150)
 )
