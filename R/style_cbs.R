@@ -92,7 +92,8 @@ cbs_purple_7 <- cbs_purple
 cbs_purple_5 <- cbs_purple[2:6]
 
 cbs_grey <- "#e5e5e5"
-cbs_axis <- "#777777"
+cbs_gridLinesColor <- "#878787"
+cbs_axisLineColor <- "#777777"
 
 font_title <- "Soho W01 Medium, Cambria, serif"
 font_text <- "Akko W01 Regular, Cambria Light, sans-serif"
@@ -126,13 +127,9 @@ list(
   , categoryAxis = list(
     axisLine = list(
       show = TRUE
-      , lineStyle = list(color = cbs_axis, width = 1.5)
+      , lineStyle = list(color = cbs_axisLineColor, width = 2)
     )
-    , axisTick = list(
-      show = TRUE
-      , lineStyle = list(color = cbs_axis, width = 1.5)
-      , length = 4
-    )
+    , axisTick = list(show = FALSE) #, lineStyle = list(color = css_color$dark_gray, width = 1.5), length = 4)
     , axisLabel = list(
       show = TRUE
       , color = css_color$web_text
@@ -170,7 +167,7 @@ list(
     )
     , splitLine = list(
       show = TRUE
-      , lineStyle = list(color = cbs_axis, width = 0.25)
+      , lineStyle = list(color = cbs_gridLinesColor, width = 1)
     )
     , splitArea = list(show = FALSE)
   )
@@ -179,13 +176,9 @@ list(
   , timeAxis = list(
     axisLine = list(
       show = TRUE
-      , lineStyle = list(color = cbs_axis, width = 1.5)
+      , lineStyle = list(color = cbs_axisLineColor, width = 2)
     )
-    , axisTick = list(
-      show = TRUE
-      , lineStyle = list(color = cbs_axis, width = 1.5)
-      , length = 4
-    )
+    , axisTick = list(show = FALSE) #, lineStyle = list(color = css_color$dark_gray, width = 1.5), length = 4)
     , axisLabel = list(show = TRUE, color = css_color$web_text, fontSize = 12)
     , nameLocation = "end"
     , nameGap = 0
@@ -215,7 +208,7 @@ list(
     )
     , splitLine = list(
       show = TRUE
-      , lineStyle = list(color = cbs_axis, width = 0.25)
+      , lineStyle = list(color = cbs_gridLinesColor, width = 1)
     )
     , splitArea = list(show = FALSE)
   )
@@ -262,7 +255,7 @@ list(
       type = "line"
       , axis = "x"
       , lineStyle = list(
-        color = cbs_axis
+        color = css_color$dark_gray
         , type = "dashed"
         , width = 1
       )

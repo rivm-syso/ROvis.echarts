@@ -39,16 +39,11 @@
       "show": true,
       "lineStyle": {
         "color": "#777777",
-        "width": 1.5
+        "width": 2
       }
     },
     "axisTick": {
-      "show": true,
-      "lineStyle": {
-        "color": "#777777",
-        "width": 1.5
-      },
-      "length": 4
+      "show": false
     },
     "axisLabel": {
       "show": true,
@@ -94,8 +89,8 @@
     "splitLine": {
       "show": true,
       "lineStyle": {
-        "color": "#777777",
-        "width": 0.25
+        "color": "#878787",
+        "width": 1
       }
     },
     "splitArea": {
@@ -107,16 +102,11 @@
       "show": true,
       "lineStyle": {
         "color": "#777777",
-        "width": 1.5
+        "width": 2
       }
     },
     "axisTick": {
-      "show": true,
-      "lineStyle": {
-        "color": "#777777",
-        "width": 1.5
-      },
-      "length": 4
+      "show": false
     },
     "axisLabel": {
       "show": true,
@@ -162,7 +152,7 @@
     "splitLine": {
       "show": true,
       "lineStyle": {
-        "color": "#777777",
+        "color": "#878787",
         "width": 0.25
       }
     },
@@ -216,7 +206,7 @@
       "type": "line",
       "axis": "x",
       "lineStyle": {
-        "color": "#777777",
+        "color": "#878787",
         "type": "dashed",
         "width": 1
       }
