@@ -134,11 +134,11 @@ dat_cases |>
   group_by(sex) |>
   e_charts(agegroup) |>
   e_bar(n) |>
-  e_title("Cases by age group and sex") |>
+  e_title("Cases by age group and sex", subtext = "year") |>
   e_x_axis(name = "Age class") |>
   e_y_axis(name = "Value") |>
   e_tooltip(trigger = "axis") |>
-  ro_e_theme(palette = "gender_con")
+  ro_e_theme(palette = "gender_con", stijl = "cbs")
 ```
 
 ### Horizontal bar chart
@@ -169,7 +169,7 @@ dat_weekly |>
   e_x_axis(name = "Week") |>
   e_y_axis(name = "Value") |>
   e_tooltip(trigger = "axis") |>
-  ro_e_theme(palette = "gender_con")
+  ro_e_theme(palette = "gender_con", stijl = "cbs")
 ```
 
 A note on x-axis variable types: if your x-axis variable is numeric (like a year or week number), `echarts4r` treats it as a value axis. The RO theme shows grid lines on all value axes, so you will end up with vertical grid lines as well as horizontal ones. To avoid this, make the x-axis variable a factor with explicit levels. That way `echarts4r` uses a category axis, which has no grid lines, while the order of the values stays correct. For example, we achieved this by:
@@ -183,7 +183,7 @@ For convenience, there will also be a warning displayed when you try to do so:
 
 ```{r numeric-axis}
 data_multi <- data.frame(
-  year = c(2020, 2021, 2022, 2023, 2024),
+  year = as.character(c(2020, 2021, 2022, 2023, 2024)),
   women = c(120, 145, 160, 175, 190),
   men = c(95, 110, 125, 140, 150)
 )
@@ -226,6 +226,22 @@ tab_cases_week_by_prov |>
   e_tooltip(trigger = "item") |>
   ro_e_theme()
 ```
+### Choropleet
+```{r choropleet}
+geojson <- jsonlite::read_json("../inst/extdata/provincie_2026.geojson")
+dataset <- data.frame(
+  statcode = paste0("PV", 20:31)
+  , value = as.numeric(sample(1:12))
+)
+
+dataset |> 
+  e_charts(statcode) |> 
+  e_map_register("provincie", geojson) |> 
+  e_map(value, map = "provincie", nameProperty = "statcode") |> # define region id (nameProperty) for joining.
+  e_visual_map(value, inRange = list(color = cbs_green_5)) |>
+  ro_e_theme()
+```
+
 
 ## Aspect ratio
 
@@ -366,4 +382,5 @@ dat_cases |>
   ro_e_theme() |>
   ro_e_keyboard_nav()
 ```
+
 
