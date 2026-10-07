@@ -55,7 +55,7 @@
     "nameTextStyle": {
       "fontSize": 13,
       "color": "#091d23",
-      "align": "right",
+      "align": "left",
       "verticalAlign": "top",
       "padding": [25, 0, 0, 0]
     },
@@ -78,13 +78,14 @@
       "color": "#091d23",
       "fontSize": 12
     },
+    "position": "left",
     "nameLocation": "end",
-    "nameGap": 9,
-    "nameRotate": 0,
+    "nameGap": 0,
+    "nameRotate": 50,
     "nameTextStyle": {
       "fontSize": 13,
       "color": "#091d23",
-      "align": "left"
+      "align": "right"
     },
     "splitLine": {
       "show": true,
@@ -116,7 +117,7 @@
     "nameLocation": "end",
     "nameGap": 0,
     "nameTextStyle": {
-      "fontSize": 13,
+      "fontSize": 30,
       "color": "#091d23",
       "align": "right",
       "verticalAlign": "top",
@@ -153,7 +154,7 @@
       "show": true,
       "lineStyle": {
         "color": "#878787",
-        "width": 0.25
+        "width": 1
       }
     },
     "splitArea": {

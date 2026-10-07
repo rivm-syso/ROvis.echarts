@@ -98,7 +98,7 @@ cbs_axisLineColor <- "#777777"
 font_title <- "Soho W01 Medium, Cambria, serif"
 font_text <- "Akko W01 Regular, Cambria Light, sans-serif"
 
-list(
+cbs_style <- list(
   color = as.list(unname(palette))
 
   , backgroundColor = "transparent"
@@ -142,7 +142,7 @@ list(
     , nameTextStyle = list(
       fontSize = 13
       , color = css_color$web_text
-      , align = "right"
+      , align = "left"
       , verticalAlign = "top"
       , padding = c(25, 0, 0, 0)
     )
@@ -157,13 +157,14 @@ list(
     , axisLabel = list(show = TRUE, color = css_color$web_text, fontSize = 12)#, formatter = htmlwidgets::JS(
     #   "function(value) { return Number(value).toLocaleString('fr-FR'); }"
     # ))
+    , position = "left"
     , nameLocation = "end"
-    , nameGap = 9
-    , nameRotate = 0
+    , nameGap = 0
+    , nameRotate = 50
     , nameTextStyle = list(
       fontSize = 13
       , color = css_color$web_text
-      , align = "left"
+      , align = "right"
     )
     , splitLine = list(
       show = TRUE
@@ -183,7 +184,7 @@ list(
     , nameLocation = "end"
     , nameGap = 0
     , nameTextStyle = list(
-      fontSize = 13
+      fontSize = 30
       , color = css_color$web_text
       , align = "right"
       , verticalAlign = "top"
@@ -323,5 +324,6 @@ list(
 
   # --- Toolbox --------------------------------------------------------
   , toolbox = list(iconStyle = list(borderColor = ro_color("grijs_7")))
-) |>
-  jsonlite::write_json("inst/extdata/cbs.json", auto_unbox = TRUE, pretty = TRUE)
+)
+
+jsonlite::write_json(cbs_style, "inst/extdata/cbs.json", auto_unbox = TRUE, pretty = TRUE)
