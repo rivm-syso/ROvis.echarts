@@ -1,9 +1,8 @@
 ---
 title: "ECharts in RO style"
-output:
-  rmarkdown::html_vignette:
-    dpi: 72
-  tabset: TRUE
+format:
+  html:
+    tabset: TRUE
 vignette: >
   %\VignetteIndexEntry{ECharts in RO style}
   %\VignetteEngine{quarto::html}
