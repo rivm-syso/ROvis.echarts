@@ -226,4 +226,4 @@ list(
   # --- Toolbox --------------------------------------------------------
   toolbox = list(iconStyle = list(borderColor = ro_color("grijs_7")))
 ) |>
-  jsonlite::write_json("inst/extdata/rivm.json", auto_unbox = TRUE)
+  jsonlite::write_json("inst/extdata/rivm.json", auto_unbox = TRUE, pretty = TRUE)

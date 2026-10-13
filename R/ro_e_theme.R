@@ -67,9 +67,14 @@ ro_e_theme <- function(
   palette = "categorical",
   fixed_aspect = TRUE,
   font = NULL,
-  renderer = "svg",
-  stijl = "rivm"
+  renderer = "svg"
+  # stijl = "rivm"
 ) {
+
+  # retrieve style from environment
+  stijl <- Sys.getenv("rovis_style")
+  if(stijl == "") stijl  <- "default"
+
   renderer <- arg_match(renderer, c("svg", "canvas"))
   e$x$renderer <- renderer
 
