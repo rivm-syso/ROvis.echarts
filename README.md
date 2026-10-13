@@ -14,10 +14,9 @@ A tool to uniformly visualise graphs in 'echarts4r' using standardized Rijksover
 ## Installation
 
 ```r
-# Install from GitHub (private repo - requires GitHub auth, e.g. a PAT
-# via usethis::create_github_token() / gitcreds, since this repo is private)
-# install.packages("remotes")
-remotes::install_github("rivm-syso/ROvis.echarts")
+# Install from GitHub 
+# install.packages("pak")
+pak::pak("rivm-syso/ROvis.echarts")
 ```
 
 
