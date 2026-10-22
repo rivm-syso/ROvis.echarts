@@ -34,9 +34,9 @@
 #'
 #' fig2 <-   ro_e_keyboard_nav_legend(fig)
 #' }
-ro_e_keyboard_nav_legend <- function(fig2) {
+ro_e_keyboard_nav_legend <- function(fig) {
 # Add separate keyboard accessibility for legend items
-fig3 <- htmlwidgets::onRender(fig2, "
+fig2 <- htmlwidgets::onRender(fig, "
   function(el) {
     var myChart = echarts.getInstanceByDom(el);
 
@@ -209,5 +209,5 @@ fig3 <- htmlwidgets::onRender(fig2, "
   }
   ")
 
-return(fig3)
+return(fig2)
 }
