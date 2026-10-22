@@ -4,15 +4,10 @@
 \alias{ro_e_keyboard_nav}
 \title{Add keyboard navigation to an echarts4r chart}
 \usage{
-ro_e_keyboard_nav(e, series_keys = NULL, axis = NULL)
+ro_e_keyboard_nav(e, axis = NULL)
 }
 \arguments{
 \item{e}{An echarts4r object.}
-
-\item{series_keys}{Named character vector mapping single-letter key codes to
-series names, e.g. \code{c(w = "Women", m = "Men", t = "Total")}. Names must
-be single letters (case-insensitive); values must exactly match the series
-names as used in the chart. Set to \code{NULL} (default) to omit legend controls.}
 
 \item{axis}{Character. Arrow-key direction for tooltip navigation. One of
 \code{"horizontal"} (ArrowLeft / ArrowRight), \code{"vertical"} (ArrowUp / ArrowDown),
@@ -24,17 +19,15 @@ The modified echarts4r object, with keyboard navigation attached via
 }
 \description{
 \code{ro_e_keyboard_nav()} attaches JavaScript keyboard event listeners
-to an echarts4r chart, enabling keyboard-only users to navigate data points
-and toggle legend series. It is designed to follow \code{\link[=ro_e_theme]{ro_e_theme()}} at the end
-of an echarts4r pipeline.
+to an echarts4r chart, enabling keyboard-only users to navigate data points.
+It is designed to follow \code{\link[=ro_e_theme]{ro_e_theme()}} at the end of an echarts4r pipeline.
+Pair it with \code{\link[=ro_e_keyboard_nav_legend]{ro_e_keyboard_nav_legend()}} to make the legend keyboard-accessible.
 }
 \section{Keyboard controls}{
 
 Arrow keys: move the tooltip across data points. Direction is
 auto-detected from chart orientation (left/right for column and line
 charts; up/down for bar charts), or set explicitly via \code{axis}.
-Letter keys: toggle individual legend series. Controlled by
-\code{series_keys}; nothing is hardcoded. Pass \code{NULL} to omit legend controls.
 }
 
 \section{Axis auto-detection}{
@@ -54,13 +47,15 @@ data |>
  e_line(value) |>
  e_tooltip(trigger = "axis") |>
  ro_e_theme() |>
- ro_e_keyboard_nav(series_keys = c(w = "Women", m = "Men", t = "Total"))
+ ro_e_keyboard_nav() |>
+ ro_e_keyboard_nav_legend()
 }
 
 }
 \seealso{
 \itemize{
 \item \code{\link[=ro_e_theme]{ro_e_theme()}} to apply the RO visual theme.
+\item \code{\link[=ro_e_keyboard_nav_legend]{ro_e_keyboard_nav_legend()}} for legend keyboard accessibility.
 \item \code{\link[echarts4r:e_flip_coords]{echarts4r::e_flip_coords()}} which determines axis orientation.
 }
 
@@ -69,7 +64,6 @@ Other echarts4r:
 \code{\link[=ro_e_build_onrender_js]{ro_e_build_onrender_js()}},
 \code{\link[=ro_e_detect_axis_orientation]{ro_e_detect_axis_orientation()}},
 \code{\link[=ro_e_keyboard_nav_axis_js]{ro_e_keyboard_nav_axis_js()}},
-\code{\link[=ro_e_keyboard_nav_legend_js]{ro_e_keyboard_nav_legend_js()}},
 \code{\link[=ro_e_theme]{ro_e_theme()}},
 \code{\link[=ro_e_theme_list]{ro_e_theme_list()}}
 }
