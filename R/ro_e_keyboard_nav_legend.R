@@ -58,8 +58,6 @@ fig3 <- htmlwidgets::onRender(fig2, "
         });
       }
 
-      console.log('Series names from chart:', seriesNames);
-
       var allPaths = el.querySelectorAll('svg path');
       var legendRectPaths = [];
       var legendHitAreaPaths = [];
@@ -80,8 +78,6 @@ fig3 <- htmlwidgets::onRender(fig2, "
         }
       });
 
-      console.log('Found legend rectangle paths:', legendRectPaths.length);
-
       var legendTexts = el.querySelectorAll('svg text');
       var textElements = [];
 
@@ -91,8 +87,6 @@ fig3 <- htmlwidgets::onRender(fig2, "
           textElements.push({ text: textEl, name: content });
         }
       });
-
-      console.log('Found legend text elements:', textElements.length);
 
       var legendItems = [];
 
@@ -115,7 +109,6 @@ fig3 <- htmlwidgets::onRender(fig2, "
         });
 
         if (closestPath) {
-          console.log('Matched', item.name, 'to path at distance', minDistance);
           var closestHitArea = null;
           var hitAreaMinDistance = Infinity;
           legendHitAreaPaths.forEach(function(path) {
@@ -138,8 +131,6 @@ fig3 <- htmlwidgets::onRender(fig2, "
         }
       });
 
-      console.log('Final legend items array:', legendItems.length);
-
       legendItems.forEach(function(item, idx) {
         var path = item.path;
         var iconPath = item.iconPath;
@@ -147,7 +138,6 @@ fig3 <- htmlwidgets::onRender(fig2, "
         var itemName = item.name;
 
         if (path.getAttribute('data-legend-setup') === 'true') {
-          console.log('Skipping already setup legend:', itemName);
           return;
         }
 
@@ -162,13 +152,9 @@ fig3 <- htmlwidgets::onRender(fig2, "
         var isSelected = !legendSelected || legendSelected[itemName] !== false;
         path.setAttribute('aria-pressed', String(isSelected));
 
-        console.log('Setup legend item:', itemName, 'tabindex:', path.getAttribute('tabindex'));
-
         if (!path.__legendFocusHandler) {
           path.__legendFocusHandler = true;
           path.addEventListener('focus', function() {
-            var currentName = path.getAttribute('data-legend-name');
-            console.log('Legend item focused:', currentName);
             if (keyboardMode) {
               path.style.outline = '2px solid #333';
               path.style.outlineOffset = '2px';
@@ -191,7 +177,6 @@ fig3 <- htmlwidgets::onRender(fig2, "
               e.preventDefault();
               e.stopPropagation();
               var currentName = path.getAttribute('data-legend-name');
-              console.log('Legend activated with keyboard:', currentName);
               myChart.dispatchAction({ type: 'legendToggleSelect', name: currentName });
             }
           });
@@ -202,7 +187,6 @@ fig3 <- htmlwidgets::onRender(fig2, "
     setTimeout(addLegendKeyboardNav, 600);
 
     myChart.on('legendselectchanged', function(params) {
-      console.log('Legend selection changed event fired');
       var focusedName = params.name;
       setTimeout(function() {
         var oldPaths = el.querySelectorAll('[data-legend-setup]');
