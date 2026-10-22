@@ -4,10 +4,10 @@
 \alias{ro_e_keyboard_nav_legend}
 \title{Improve keyboard accessibility for echarts4r legends}
 \usage{
-ro_e_keyboard_nav_legend(fig2)
+ro_e_keyboard_nav_legend(fig)
 }
 \arguments{
-\item{fig}{A \code{echarts4r} object, requires \code{renderer = "svg"}}
+\item{fig}{A \code{echarts4r} object, requires \code{renderer = "svg"}, and \code{rep(list("path://M0,0 L40,0 L40,20 L0,20 Z"), 2)}}
 }
 \value{
 A \code{echarts4r} object with improved legend accessibility.
@@ -22,6 +22,8 @@ Focus indication is only shown when navigating with the keyboard. ARIA attribute
 }
 \examples{
 \dontrun{
+library(echarts4r)
+
 data <- tidyr::tibble(
   expand.grid(`Age group` = c("A", "B", "C", "D", "E"), `Sex` = c("Man", "Vrouw")),
   `Number of Cases` = sample(1:50, 10, TRUE)
@@ -42,5 +44,14 @@ fig <- data_wide |>
   )
 
 fig2 <-   ro_e_keyboard_nav_legend(fig)
+
+# Same, but with ro_e_theme() applied first (HTML legend instead of SVG).
+fig3 <- data_wide |>
+  e_charts(`Age group`, renderer = "svg") |>
+  e_bar(Man, name = "Man") |>
+  e_bar(Vrouw, name = "Vrouw") |>
+  e_flip_coords() |>
+  ro_e_theme() |>
+  ro_e_keyboard_nav_legend()
 }
 }

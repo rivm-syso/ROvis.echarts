@@ -6,16 +6,14 @@
 #' @description
 # #' `r ro_group_badge('echarts4r')`
 #' `ro_e_keyboard_nav()` attaches JavaScript keyboard event listeners
-#' to an echarts4r chart, enabling keyboard-only users to navigate data points
-#' and toggle legend series. It is designed to follow [ro_e_theme()] at the end
-#' of an echarts4r pipeline.
+#' to an echarts4r chart, enabling keyboard-only users to navigate data points.
+#' It is designed to follow [ro_e_theme()] at the end of an echarts4r pipeline.
+#' Pair it with [ro_e_keyboard_nav_legend()] to make the legend keyboard-accessible.
 #'
 #' @section Keyboard controls:
 #' Arrow keys: move the tooltip across data points. Direction is
 #' auto-detected from chart orientation (left/right for column and line
 #' charts; up/down for bar charts), or set explicitly via `axis`.
-#' Letter keys: toggle individual legend series. Controlled by
-#' `series_keys`; nothing is hardcoded. Pass `NULL` to omit legend controls.
 #'
 #' @section Axis auto-detection:
 #' The function inspects the echarts4r object to determine whether
@@ -23,10 +21,6 @@
 #' accordingly. Override this with the `axis` argument.
 #'
 #' @param e An echarts4r object.
-#' @param series_keys Named character vector mapping single-letter key codes to
-#' series names, e.g. `c(w = "Women", m = "Men", t = "Total")`. Names must
-#' be single letters (case-insensitive); values must exactly match the series
-#' names as used in the chart. Set to `NULL` (default) to omit legend controls.
 #' @param axis Character. Arrow-key direction for tooltip navigation. One of
 #' `"horizontal"` (ArrowLeft / ArrowRight), `"vertical"` (ArrowUp / ArrowDown),
 #' or `"both"`. Default `NULL` auto-detects from the chart orientation.
@@ -36,6 +30,7 @@
 #'
 #' @seealso
 #' * [ro_e_theme()] to apply the RO visual theme.
+#' * [ro_e_keyboard_nav_legend()] for legend keyboard accessibility.
 #' * [echarts4r::e_flip_coords()] which determines axis orientation.
 #' @family echarts4r
 #' @examples
@@ -48,31 +43,13 @@
 #'  e_line(value) |>
 #'  e_tooltip(trigger = "axis") |>
 #'  ro_e_theme() |>
-#'  ro_e_keyboard_nav(series_keys = c(w = "Women", m = "Men", t = "Total"))
+#'  ro_e_keyboard_nav() |>
+#'  ro_e_keyboard_nav_legend()
 #' }
 #'
 #' @importFrom htmlwidgets onRender
 #' @export
-ro_e_keyboard_nav <- function(e, series_keys = NULL, axis = NULL) {
-  if (!is.null(series_keys)) {
-    if (!is.character(series_keys) || is.null(names(series_keys))) {
-      cli_abort(
-        "{.arg series_keys} must be a named character vector, e.g. {.code c(w = \"Women\", m = \"Men\")}."
-      )
-    }
-
-    bad_keys <- names(series_keys)[nchar(names(series_keys)) != 1]
-    if (length(bad_keys) > 0) {
-      cli_abort(
-        "All names of {.arg series_keys} must be single letters. Invalid: {.val {bad_keys}}."
-      )
-    }
-
-    if (any(nchar(series_keys) == 0)) {
-      cli_abort("All values of {.arg series_keys} must be non-empty strings.")
-    }
-  }
-
+ro_e_keyboard_nav <- function(e, axis = NULL) {
   if (!is.null(axis)) {
     axis <- arg_match(axis, c("horizontal", "vertical", "both"))
   }
@@ -82,10 +59,8 @@ ro_e_keyboard_nav <- function(e, series_keys = NULL, axis = NULL) {
     axis <- ro_e_detect_axis_orientation(e)
   }
 
-  # Build the two JS pieces independently, then combine.
   axis_js <- ro_e_keyboard_nav_axis_js(axis)
-  legend_js <- ro_e_keyboard_nav_legend_js(series_keys)
-  js <- ro_e_build_keyboard_nav_js(axis_js, legend_js)
+  js <- ro_e_build_keyboard_nav_js(axis_js)
 
   onRender(e, js)
 }

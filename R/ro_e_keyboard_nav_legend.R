@@ -13,6 +13,8 @@
 #' @export
 #' @examples
 #' \dontrun{
+#' library(echarts4r)
+#'
 #' data <- tidyr::tibble(
 #'   expand.grid(`Age group` = c("A", "B", "C", "D", "E"), `Sex` = c("Man", "Vrouw")),
 #'   `Number of Cases` = sample(1:50, 10, TRUE)
@@ -33,6 +35,15 @@
 #'   )
 #'
 #' fig2 <-   ro_e_keyboard_nav_legend(fig)
+#'
+#' # Same, but with ro_e_theme() applied first (HTML legend instead of SVG).
+#' fig3 <- data_wide |>
+#'   e_charts(`Age group`, renderer = "svg") |>
+#'   e_bar(Man, name = "Man") |>
+#'   e_bar(Vrouw, name = "Vrouw") |>
+#'   e_flip_coords() |>
+#'   ro_e_theme() |>
+#'   ro_e_keyboard_nav_legend()
 #' }
 ro_e_keyboard_nav_legend <- function(fig) {
 # Add separate keyboard accessibility for legend items
@@ -47,6 +58,39 @@ fig2 <- htmlwidgets::onRender(fig, "
     document.addEventListener('mouseup', function(e) { keyboardMode = false; }, true);
 
     function addLegendKeyboardNav() {
+      // ro_e_theme() hides the native SVG legend and draws its own
+      // '.ro-legend-item' spans instead, so handle that legend here directly.
+      var htmlItems = el.querySelectorAll('.ro-legend-item');
+
+      if (htmlItems.length > 0) {
+        htmlItems.forEach(function(item) {
+          if (item.getAttribute('data-legend-setup') === 'true') return;
+
+          var itemName = item.dataset.name;
+          item.setAttribute('data-legend-setup', 'true');
+          item.setAttribute('data-legend-name', itemName);
+
+          item.setAttribute('tabindex', '0');
+          item.setAttribute('role', 'button');
+          item.setAttribute('aria-label', 'Legenda: ' + itemName);
+
+          // legendselectchanged clears data-legend-setup to re-run this loop,
+          // but the HTML legend's <span> nodes are never recreated, so guard
+          // against attaching a second keydown listener to the same node.
+          if (item.__legendKeyHandler) return;
+          item.__legendKeyHandler = true;
+
+          item.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault();
+              myChart.dispatchAction({ type: 'legendToggleSelect', name: itemName });
+            }
+          });
+        });
+
+        return;
+      }
+
       var option = myChart.getOption();
       var seriesNames = [];
 
