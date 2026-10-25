@@ -22,3 +22,5 @@ Rlib
 air.toml
 ^\.positai$
 ^\.claude$
+^data-raw$
+^Makefile$
