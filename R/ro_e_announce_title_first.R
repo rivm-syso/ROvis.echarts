@@ -20,8 +20,8 @@
 #'  ro_e_announce_title_first()
 #' }
 #' @importFrom htmlwidgets onRender
-ro_e_announce_title_first <- function(fig) {
-  fig <- htmlwidgets::onRender(fig, "
+ro_e_announce_title_first <- function(e) {
+  e <- htmlwidgets::onRender(e, "
   function(el) {
     var myChart = echarts.getInstanceByDom(el);
     var titleText = myChart.getOption().title[0].text;
@@ -53,5 +53,5 @@ ro_e_announce_title_first <- function(fig) {
     });
   }
   ")
-  return(fig)
+  return(e)
 }
