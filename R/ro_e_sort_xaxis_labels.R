@@ -22,8 +22,8 @@
 #'  ro_e_sort_xaxis_labels()
 #' }
 #' @importFrom htmlwidgets onRender
-ro_e_sort_xaxis_labels <- function(fig) {
-  fig <- htmlwidgets::onRender(fig, "
+ro_e_sort_xaxis_labels <- function(e) {
+  e <- htmlwidgets::onRender(e, "
   function(el) {
     var myChart = echarts.getInstanceByDom(el);
 
@@ -74,5 +74,5 @@ ro_e_sort_xaxis_labels <- function(fig) {
     });
   }
   ")
-  return(fig)
+  return(e)
 }
