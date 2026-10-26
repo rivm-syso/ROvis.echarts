@@ -9,8 +9,7 @@
 #' @param fig A \code{echarts4r} object, requires `renderer = "svg"`, and `rep(list("path://M0,0 L40,0 L40,20 L0,20 Z"), 2)`
 #'
 #' @return A \code{echarts4r} object with improved legend accessibility.
-#'
-#' @export
+#' @keywords internal
 #' @examples
 #' \dontrun{
 #' library(echarts4r)
