@@ -1,8 +1,8 @@
 
 #' Reorders x-axis label text nodes to match their left-to-right
-#' (chronological) on-screen order, since echarts' anti-overlap label layout
+#' (visual order) on-screen order, since echarts' anti-overlap label layout
 #' can append them out of sequence. This ensures screen readers announce the
-#' labels in chronological order instead of DOM-insertion order.
+#' labels in left-to-right-visual order instead of DOM-insertion order.
 #'
 #' @param fig An echarts4r/htmlwidget figure.
 #'
