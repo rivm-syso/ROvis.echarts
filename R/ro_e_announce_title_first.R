@@ -7,6 +7,7 @@
 #' @return The figure, wrapped with an `htmlwidgets::onRender()` call.
 #'
 #' @family echarts4r
+#' @keywords internal
 #' @examples
 #' \dontrun{
 #' library(echarts4r)
