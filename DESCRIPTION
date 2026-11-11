@@ -23,7 +23,7 @@ Suggests:
 Depends:
     R (>= 4.5.0)
 Remotes:
-    git@github.com:rivm-syso/ROvis.utils
+    rivm-syso/ROvis.utils@*release
 VignetteBuilder: quarto
 Config/testthat/edition: 3
 Encoding: UTF-8
