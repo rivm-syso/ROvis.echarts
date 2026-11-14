@@ -1,0 +1,28 @@
+{
+  "color": [
+    "#e41a1c",
+    "#377eb8",
+    "#4daf4a",
+    "#899d0c",
+    "#984ea3",
+    "#ff7f00",
+    "#ffff33",
+    "#a65628",
+    "#f781bf"
+  ],
+  "backgroundColor": "transparent",
+  "textStyle": {
+    "fontFamily": "roboto"
+  },
+  "title": [],
+  "categoryAxis": [],
+  "valueAxis": [],
+  "timeAxis": [],
+  "logAxis": [],
+  "legend": [],
+  "tooltip": [],
+  "line": [],
+  "bar": [],
+  "scatter": [],
+  "toolbox": []
+}

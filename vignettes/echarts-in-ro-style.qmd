@@ -11,6 +11,8 @@ vignette: >
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, fig.width = 8, fig.height = 5)
+
+Sys.setenv("rovis_style"="rivm")
 ```
 
 This vignette covers the `echarts4r` functions in `ROvis`: `ro_e_theme()` and `ro_e_keyboard_nav()`. Together they let you build interactive charts that follow the Rijksoverheid (RO) visual style. If you are new to `echarts4r`, we recommend checking out the [echarts4r documentation](https://echarts4r.john-coene.com/) first.
@@ -133,7 +135,7 @@ dat_cases |>
   group_by(sex) |>
   e_charts(agegroup) |>
   e_bar(n) |>
-  e_title("Cases by age group and sex") |>
+  e_title("Cases by age group and sex", subtext = "year") |>
   e_x_axis(name = "Age class") |>
   e_y_axis(name = "Value") |>
   e_tooltip(trigger = "axis") |>
@@ -182,7 +184,7 @@ For convenience, there will also be a warning displayed when you try to do so:
 
 ```{r numeric-axis}
 data_multi <- data.frame(
-  year = c(2020, 2021, 2022, 2023, 2024),
+  year = as.character(c(2020, 2021, 2022, 2023, 2024)),
   women = c(120, 145, 160, 175, 190),
   men = c(95, 110, 125, 140, 150)
 )
@@ -225,6 +227,29 @@ tab_cases_week_by_prov |>
   e_tooltip(trigger = "item") |>
   ro_e_theme()
 ```
+### Choropleet
+```{r choropleet}
+geojson <- jsonlite::read_json("../inst/extdata/provincie_2026.geojson")
+dataset <- data.frame(
+  statcode = paste0("PV", 20:31)
+  , value = as.numeric(sample(1:12))
+)
+green5 <- c(
+  "#edf0c7"
+  , "#c9de85"
+  , "#85bc22"
+  , "#348a3a"
+  , "#0f5f34"
+)
+
+dataset |> 
+  e_charts(statcode) |> 
+  e_map_register("provincie", geojson) |> 
+  e_map(value, map = "provincie", nameProperty = "statcode") |> # define region id (nameProperty) for joining.
+  e_visual_map(value, inRange = list(color = green5)) |>
+  ro_e_theme()
+```
+
 
 ## Aspect ratio
 
@@ -365,4 +390,5 @@ dat_cases |>
   ro_e_theme() |>
   ro_e_keyboard_nav()
 ```
+
 
