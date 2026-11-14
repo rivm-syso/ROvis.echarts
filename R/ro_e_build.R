@@ -1,39 +1,13 @@
 # Internal helpers ---------------------------------------------------------
 
-#' Generates the JavaScript snippet for legend-toggle keyboard navigation.
-#'
-#' One JS line is emitted per entry in series_keys.
-#'
-#' Key name format: paste0("Key", toupper(names(series_keys)))
-#' e.g. c(w = "Women", m = "Men") becomes 'KeyW', 'KeyM'
-#'
-#' @keywords internal
-#' @family echarts4r
-#' @param series_keys Named character vector, or NULL.
-#'
-#' @return A character string of JavaScript, or "" when series_keys is NULL.
-ro_e_keyboard_nav_legend_js <- function(series_keys) {
-  if (is.null(series_keys)) {
-    return("")
-  }
-
-  js_lines <- sprintf(
-    "if (pp.code == 'Key%s') myChart.dispatchAction({ type: 'legendToggleSelect', name: '%s' });",
-    toupper(names(series_keys)),
-    series_keys
-  )
-  paste(js_lines, collapse = "\n")
-}
-
-#' Wraps axis and legend JS snippets in the full onRender callback template.
+#' Wraps the axis JS snippet in the full onRender callback template.
 #'
 #' @keywords internal
 #'
 #' @param axis_js Character. Output of ro_e_keyboard_nav_axis_js().
-#' @param legend_js Character. Output of ro_e_keyboard_nav_legend_js().
 #' @family echarts4r
 #' @return A single JavaScript string ready for htmlwidgets::onRender().
-ro_e_build_keyboard_nav_js <- function(axis_js, legend_js) {
+ro_e_build_keyboard_nav_js <- function(axis_js) {
   sprintf(
     "function(el) {
       const myChart = echarts.getInstanceByDom(el)
@@ -41,11 +15,9 @@ ro_e_build_keyboard_nav_js <- function(axis_js, legend_js) {
       var sidx = 0
       window.addEventListener('keydown', function(pp) {
         %s
-        %s
       })
     }",
-    axis_js,
-    legend_js
+    axis_js
   )
 }
 
@@ -366,7 +338,8 @@ ro_e_build_onrender_js <- function(
         chart.on('legendselectchanged', function(event) {
           selected = event.selected;
           container.querySelectorAll('.ro-legend-item').forEach(function(item) {
-            if (selected[item.dataset.name]) styleNormal(item); else styleHidden(item);
+            var isSelected = !!selected[item.dataset.name];
+            if (isSelected) styleNormal(item); else styleHidden(item);
           });
         });
       }

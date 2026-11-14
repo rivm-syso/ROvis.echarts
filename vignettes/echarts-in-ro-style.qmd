@@ -291,12 +291,12 @@ dat_cases |>
 
 ## Keyboard navigation
 
-Interactive charts need to be accessible to keyboard-only users. `ro_e_keyboard_nav()` adds keyboard controls on top of `ro_e_theme()`:
+Interactive charts need to be accessible to keyboard-only users. `ro_e_keyboard_nav()` adds keyboard controls on top of `ro_e_theme()`, and `ro_e_keyboard_nav_legend()` makes the legend keyboard-accessible:
 
 * **Arrow keys** move the tooltip across data points. The direction is auto-detected from the chart orientation (left/right for column and line charts, up/down for horizontal bar charts). You can also set it explicitly with `axis`.
-* **Letter keys** toggle individual series on and off. Use the `series_keys` argument to map a single letter to each series name.
+* **Tab** focuses legend items; **Enter** or **Space** toggles them.
 
-Add `ro_e_keyboard_nav()` as the last step in the pipeline:
+Add `ro_e_keyboard_nav()` and `ro_e_keyboard_nav_legend()` as the last steps in the pipeline:
 
 ```{r keyboard-nav}
 dat_weekly |>
@@ -305,16 +305,17 @@ dat_weekly |>
   e_line(n) |>
   e_title(
     "Weekly cases by sex",
-    "Use arrow keys to navigate, W/M to toggle series"
+    "Use arrow keys to navigate, Tab + Enter/Space to toggle series"
   ) |>
   e_x_axis(name = "Week") |>
   e_y_axis(name = "Value") |>
   e_tooltip(trigger = "axis") |>
   ro_e_theme(palette = "gender_con") |>
-  ro_e_keyboard_nav(series_keys = c(w = "Women", m = "Men", t = "Total"))
+  ro_e_keyboard_nav() |>
+  ro_e_keyboard_nav_legend()
 ```
 
-Where you assign "w" to "Women", "m" to "Men", and "t" to "Total". You can also extent this further. For example, in the case of Dutch provinces: 
+You can also extend this further. For example, in the case of Dutch provinces: 
 
 ```{r keyboard-nav-2}
 tab_cases_week_by_prov |>
@@ -336,19 +337,9 @@ tab_cases_week_by_prov |>
   e_legend() |>
   e_tooltip(trigger = "item") |>
   ro_e_theme() |>
-  ro_e_keyboard_nav(
-    series_keys = c(
-      f = "Flevoland",
-      g = "Groningen",
-      n = "Noord-Brabant",
-      u = "Utrecht",
-      z = "Zeeland"
-    ),
-    axis = "both"
-  )
+  ro_e_keyboard_nav(axis = "both") |>
+  ro_e_keyboard_nav_legend()
 ```
-
-Note that names must be single letters and values must exactly match the series names in the chart.
 
 For a horizontal bar chart, `ro_e_keyboard_nav()` auto-detects the vertical orientation and binds the up/down arrow keys instead:
 
