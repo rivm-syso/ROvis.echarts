@@ -14,10 +14,9 @@ A tool to uniformly visualise graphs in 'echarts4r' using standardized Rijksover
 ## Installation
 
 ```r
-# Install from GitHub (private repo - requires GitHub auth, e.g. a PAT
-# via usethis::create_github_token() / gitcreds, since this repo is private)
-# install.packages("remotes")
-remotes::install_github("rivm-syso/ROvis.echarts")
+# Install from GitHub 
+# install.packages("pak")
+pak::pak("rivm-syso/ROvis.echarts")
 ```
 
 
@@ -37,7 +36,9 @@ mtcars |>
 First point of contact for questions: ROvisteam (spin@rivm.nl)
 
 ## Contributing
-We welcome contributions and are always happy to see people help improve this package. If you would like to contribute, please first open an issue to describe the bug, feature, or proposed change. Once you are ready, submit a pull request linked to that issue. All contributions will be reviewed by the SPIN team before they are merged.
+We welcome contributions! Before you start, **please read [CONTRIBUTING.md](.github/CONTRIBUTING.md)**.
+It explains how to open an issue, our git etiquette (branches, commits, pull requests and reviews)
+and our code standards. See [CONTRIBUTORS.md](CONTRIBUTORS.md) for the list of contributors.
 
 ## Instructions for developers 
 
