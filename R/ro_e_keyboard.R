@@ -1,54 +1,21 @@
-# Public function ----------------------------------------------------------
+# Internal helpers ---------------------------------------------------------
 
-#' Add keyboard navigation to an echarts4r chart
+#' Add arrow-key tooltip navigation to an echarts4r chart
 #'
-#'
-#' @description
-# #' `r ro_group_badge('echarts4r')`
-#' `ro_e_keyboard_nav()` attaches JavaScript keyboard event listeners
-#' to an echarts4r chart, enabling keyboard-only users to navigate data points.
-#' It is designed to follow [ro_e_theme()] at the end of an echarts4r pipeline.
-#' Pair it with [ro_e_keyboard_nav_legend()] to make the legend keyboard-accessible.
-#'
-#' @section Keyboard controls:
-#' Arrow keys: move the tooltip across data points. Direction is
-#' auto-detected from chart orientation (left/right for column and line
-#' charts; up/down for bar charts), or set explicitly via `axis`.
-#'
-#' @section Axis auto-detection:
-#' The function inspects the echarts4r object to determine whether
-#' [echarts4r::e_flip_coords()] was applied, and assigns arrow keys
-#' accordingly. Override this with the `axis` argument.
+#' Internal: called by [ro_e_standard()]. Attaches a keydown listener that
+#' moves the tooltip across data points with the arrow keys. Direction is
+#' auto-detected from the chart orientation ([echarts4r::e_flip_coords()]
+#' gives up/down, otherwise left/right), or set explicitly via `axis`.
 #'
 #' @param e An echarts4r object.
-#' @param axis Character. Arrow-key direction for tooltip navigation. One of
-#' `"horizontal"` (ArrowLeft / ArrowRight), `"vertical"` (ArrowUp / ArrowDown),
-#' or `"both"`. Default `NULL` auto-detects from the chart orientation.
+#' @param axis Character. One of `"horizontal"`, `"vertical"`, or `"both"`.
+#' Default `NULL` auto-detects from the chart orientation.
 #'
 #' @return The modified echarts4r object, with keyboard navigation attached via
 #' [htmlwidgets::onRender()].
-#'
-#' @seealso
-#' * [ro_e_theme()] to apply the RO visual theme.
-#' * [ro_e_keyboard_nav_legend()] for legend keyboard accessibility.
-#' * [echarts4r::e_flip_coords()] which determines axis orientation.
+#' @keywords internal
 #' @family echarts4r
-#' @examples
-#' \dontrun{
-#' library(echarts4r)
-#'
-#' data |>
-#'  dplyr::group_by(sex) |>
-#'  e_charts(year) |>
-#'  e_line(value) |>
-#'  e_tooltip(trigger = "axis") |>
-#'  ro_e_theme() |>
-#'  ro_e_keyboard_nav() |>
-#'  ro_e_keyboard_nav_legend()
-#' }
-#'
 #' @importFrom htmlwidgets onRender
-#' @export
 ro_e_keyboard_nav <- function(e, axis = NULL) {
   if (!is.null(axis)) {
     axis <- arg_match(axis, c("horizontal", "vertical", "both"))
@@ -65,8 +32,6 @@ ro_e_keyboard_nav <- function(e, axis = NULL) {
   onRender(e, js)
 }
 
-
-# Internal helpers ---------------------------------------------------------
 
 #' Generates the JavaScript snippet for arrow-key tooltip navigation.
 #'

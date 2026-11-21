@@ -23,3 +23,26 @@ test_that("ro_e_build_onrender_js bakes in colors, series names and legend marku
   expect_match(js, "ro-legend-container")
   expect_match(js, "legendselectchanged")
 })
+
+test_that("ro_e_build_onrender_js includes legend accessibility by default", {
+  js <- ro_e_build_onrender_js(
+    colors = c("#aa0000", "#0000aa"),
+    series_names = c("Alpha", "Beta"),
+    font_family = "Verdana",
+    name_color = "#154273"
+  )
+  expect_match(js, "ro_e_legend_a11y_js()", fixed = TRUE)
+  expect_no_match(js, "__LEGEND_A11Y__", fixed = TRUE)
+})
+
+test_that("ro_e_build_onrender_js can leave legend accessibility out", {
+  js <- ro_e_build_onrender_js(
+    colors = c("#aa0000", "#0000aa"),
+    series_names = c("Alpha", "Beta"),
+    font_family = "Verdana",
+    name_color = "#154273",
+    legend_a11y = FALSE
+  )
+  expect_no_match(js, "ro_e_legend_a11y_js()", fixed = TRUE)
+  expect_no_match(js, "__LEGEND_A11Y__", fixed = TRUE)
+})

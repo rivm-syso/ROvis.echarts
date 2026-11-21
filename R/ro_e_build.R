@@ -40,6 +40,8 @@ ro_e_build_keyboard_nav_js <- function(axis_js) {
 #' @param font_family Font family string resolved by ro_e_theme().
 #' @param fixed_aspect Logical. When TRUE the chart enforces a 2:1 width:height
 #'   aspect ratio and stays responsive on resize.
+#' @param legend_a11y Logical. When TRUE (default) the HTML legend gets keyboard
+#'   and screen reader support from ro_e_legend_a11y_js().
 #' @family echarts4r
 #' @return A JavaScript string for htmlwidgets::onRender().
 ro_e_build_onrender_js <- function(
@@ -47,7 +49,8 @@ ro_e_build_onrender_js <- function(
   series_names,
   font_family,
   name_color,
-  fixed_aspect = TRUE
+  fixed_aspect = TRUE,
+  legend_a11y = TRUE
 ) {
   colors_json <- jsonlite::toJSON(colors, auto_unbox = FALSE)
   names_json <- jsonlite::toJSON(series_names, auto_unbox = FALSE)
@@ -342,6 +345,8 @@ ro_e_build_onrender_js <- function(
             if (isSelected) styleNormal(item); else styleHidden(item);
           });
         });
+
+        __LEGEND_A11Y__
       }
 
       // Defer one tick so the browser has painted and offsetHeight is stable.
@@ -369,5 +374,11 @@ ro_e_build_onrender_js <- function(
   js <- gsub("__NAMES__", names_json, js, fixed = TRUE)
   js <- gsub("__FONT_FAMILY__", font_family_json, js, fixed = TRUE)
   js <- gsub("__NAME_COLOR__", name_color_json, js, fixed = TRUE)
+  js <- gsub(
+    "__LEGEND_A11Y__",
+    if (legend_a11y) ro_e_legend_a11y_js() else "",
+    js,
+    fixed = TRUE
+  )
   js
 }
