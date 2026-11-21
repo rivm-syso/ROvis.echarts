@@ -13,7 +13,10 @@ ro_e_build_keyboard_nav_js(axis_js)
 A single JavaScript string ready for htmlwidgets::onRender().
 }
 \description{
-Wraps the axis JS snippet in the full onRender callback template.
+The listener sits on the chart element, not on \code{window}, so the arrow keys
+only act on the chart that has focus (not on every chart on the page, and
+not while typing in an input). The chart gets \code{tabindex="0"} so Tab reaches
+it, and a focus outline for keyboard focus only (\verb{:focus-visible}).
 }
 \seealso{
 Other echarts4r:
