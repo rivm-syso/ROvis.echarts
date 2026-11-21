@@ -3,11 +3,11 @@
 \name{ro_e_sort_xaxis_labels}
 \alias{ro_e_sort_xaxis_labels}
 \title{Reorders x-axis label text nodes to match their left-to-right
-(chronological) on-screen order, since echarts' anti-overlap label layout
+(visual order) on-screen order, since echarts' anti-overlap label layout
 can append them out of sequence. This ensures screen readers announce the
-labels in chronological order instead of DOM-insertion order.}
+labels in left-to-right-visual order instead of DOM-insertion order.}
 \usage{
-ro_e_sort_xaxis_labels(fig)
+ro_e_sort_xaxis_labels(e)
 }
 \arguments{
 \item{fig}{An echarts4r/htmlwidget figure.}
@@ -17,9 +17,9 @@ The figure, wrapped with an \code{htmlwidgets::onRender()} call.
 }
 \description{
 Reorders x-axis label text nodes to match their left-to-right
-(chronological) on-screen order, since echarts' anti-overlap label layout
+(visual order) on-screen order, since echarts' anti-overlap label layout
 can append them out of sequence. This ensures screen readers announce the
-labels in chronological order instead of DOM-insertion order.
+labels in left-to-right-visual order instead of DOM-insertion order.
 }
 \examples{
 \dontrun{
@@ -35,13 +35,16 @@ mtcars |>
 }
 \seealso{
 Other echarts4r:
+\code{\link[=ro_e_announce_title_first]{ro_e_announce_title_first()}},
 \code{\link[=ro_e_build_keyboard_nav_js]{ro_e_build_keyboard_nav_js()}},
 \code{\link[=ro_e_build_onrender_js]{ro_e_build_onrender_js()}},
 \code{\link[=ro_e_detect_axis_orientation]{ro_e_detect_axis_orientation()}},
 \code{\link[=ro_e_keyboard_nav]{ro_e_keyboard_nav()}},
 \code{\link[=ro_e_keyboard_nav_axis_js]{ro_e_keyboard_nav_axis_js()}},
-\code{\link[=ro_e_keyboard_nav_legend_js]{ro_e_keyboard_nav_legend_js()}},
+\code{\link[=ro_e_legend_a11y_js]{ro_e_legend_a11y_js()}},
+\code{\link[=ro_e_standard]{ro_e_standard()}},
 \code{\link[=ro_e_theme]{ro_e_theme()}},
 \code{\link[=ro_e_theme_list]{ro_e_theme_list()}}
 }
 \concept{echarts4r}
+\keyword{internal}

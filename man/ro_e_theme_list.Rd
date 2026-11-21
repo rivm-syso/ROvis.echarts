@@ -19,13 +19,15 @@ All color values are derived from ro_color(): never use raw hex codes here.
 }
 \seealso{
 Other echarts4r:
+\code{\link[=ro_e_announce_title_first]{ro_e_announce_title_first()}},
 \code{\link[=ro_e_build_keyboard_nav_js]{ro_e_build_keyboard_nav_js()}},
 \code{\link[=ro_e_build_onrender_js]{ro_e_build_onrender_js()}},
 \code{\link[=ro_e_detect_axis_orientation]{ro_e_detect_axis_orientation()}},
 \code{\link[=ro_e_keyboard_nav]{ro_e_keyboard_nav()}},
 \code{\link[=ro_e_keyboard_nav_axis_js]{ro_e_keyboard_nav_axis_js()}},
-\code{\link[=ro_e_keyboard_nav_legend_js]{ro_e_keyboard_nav_legend_js()}},
+\code{\link[=ro_e_legend_a11y_js]{ro_e_legend_a11y_js()}},
 \code{\link[=ro_e_sort_xaxis_labels]{ro_e_sort_xaxis_labels()}},
+\code{\link[=ro_e_standard]{ro_e_standard()}},
 \code{\link[=ro_e_theme]{ro_e_theme()}}
 }
 \concept{echarts4r}

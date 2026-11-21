@@ -9,7 +9,8 @@ ro_e_build_onrender_js(
   series_names,
   font_family,
   name_color,
-  fixed_aspect = TRUE
+  fixed_aspect = TRUE,
+  legend_a11y = TRUE
 )
 }
 \arguments{
@@ -21,6 +22,9 @@ ro_e_build_onrender_js(
 
 \item{fixed_aspect}{Logical. When TRUE the chart enforces a 2:1 width:height
 aspect ratio and stays responsive on resize.}
+
+\item{legend_a11y}{Logical. When TRUE (default) the HTML legend gets keyboard
+and screen reader support from ro_e_legend_a11y_js().}
 }
 \value{
 A JavaScript string for htmlwidgets::onRender().
@@ -37,12 +41,14 @@ colors are not returned by chart.getOption(), so we pass them explicitly.
 }
 \seealso{
 Other echarts4r:
+\code{\link[=ro_e_announce_title_first]{ro_e_announce_title_first()}},
 \code{\link[=ro_e_build_keyboard_nav_js]{ro_e_build_keyboard_nav_js()}},
 \code{\link[=ro_e_detect_axis_orientation]{ro_e_detect_axis_orientation()}},
 \code{\link[=ro_e_keyboard_nav]{ro_e_keyboard_nav()}},
 \code{\link[=ro_e_keyboard_nav_axis_js]{ro_e_keyboard_nav_axis_js()}},
-\code{\link[=ro_e_keyboard_nav_legend_js]{ro_e_keyboard_nav_legend_js()}},
+\code{\link[=ro_e_legend_a11y_js]{ro_e_legend_a11y_js()}},
 \code{\link[=ro_e_sort_xaxis_labels]{ro_e_sort_xaxis_labels()}},
+\code{\link[=ro_e_standard]{ro_e_standard()}},
 \code{\link[=ro_e_theme]{ro_e_theme()}},
 \code{\link[=ro_e_theme_list]{ro_e_theme_list()}}
 }
