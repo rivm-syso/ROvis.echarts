@@ -25,7 +25,9 @@ test_that("ro_e_standard adds theme and keyboard navigation", {
 })
 
 test_that("ro_e_standard passes axis and theme arguments on", {
-  result <- bar() |> ro_e_standard(axis = "vertical", renderer = "canvas")
+  result <- suppressWarnings(
+    bar() |> ro_e_standard(axis = "vertical", renderer = "canvas")
+  )
   js <- paste(unlist(result$jsHooks), collapse = "\n")
   expect_match(js, "ArrowUp", fixed = TRUE)
   expect_no_match(js, "ArrowLeft", fixed = TRUE)
@@ -34,4 +36,9 @@ test_that("ro_e_standard passes axis and theme arguments on", {
 
 test_that("ro_e_standard errors on invalid axis value", {
   expect_error(bar() |> ro_e_standard(axis = "diagonal"), "diagonal")
+})
+
+test_that("ro_e_standard warns that screen reader fixes need svg", {
+  expect_warning(bar() |> ro_e_standard(renderer = "canvas"), "svg")
+  expect_no_warning(bar() |> ro_e_standard())
 })
