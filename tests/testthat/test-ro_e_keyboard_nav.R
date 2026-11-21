@@ -31,3 +31,12 @@ test_that("ro_e_keyboard_nav errors on invalid axis value", {
     "diagonal"
   )
 })
+
+test_that("ro_e_keyboard_nav listens on the chart, not on the whole page", {
+  js <- ro_e_build_keyboard_nav_js(ro_e_keyboard_nav_axis_js("horizontal"))
+
+  expect_match(js, "el.addEventListener('keydown'", fixed = TRUE)
+  expect_no_match(js, "window.addEventListener", fixed = TRUE)
+  expect_match(js, "setAttribute('tabindex', '0')", fixed = TRUE)
+  expect_match(js, ":focus-visible", fixed = TRUE)
+})

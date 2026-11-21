@@ -2,6 +2,11 @@
 
 #' Wraps the axis JS snippet in the full onRender callback template.
 #'
+#' The listener sits on the chart element, not on `window`, so the arrow keys
+#' only act on the chart that has focus (not on every chart on the page, and
+#' not while typing in an input). The chart gets `tabindex="0"` so Tab reaches
+#' it, and a focus outline for keyboard focus only (`:focus-visible`).
+#'
 #' @keywords internal
 #'
 #' @param axis_js Character. Output of ro_e_keyboard_nav_axis_js().
@@ -11,9 +16,24 @@ ro_e_build_keyboard_nav_js <- function(axis_js) {
   sprintf(
     "function(el) {
       const myChart = echarts.getInstanceByDom(el)
+      if (!myChart) return;
       var idx = 0
       var sidx = 0
-      window.addEventListener('keydown', function(pp) {
+
+      if (!document.getElementById('ro-keyboard-nav-style')) {
+        var style = document.createElement('style');
+        style.id = 'ro-keyboard-nav-style';
+        style.textContent =
+          '.ro-keyboard-nav:focus { outline: none; }' +
+          '.ro-keyboard-nav:focus-visible { outline: 2px solid #333333; outline-offset: 2px; }';
+        document.head.appendChild(style);
+      }
+      el.classList.add('ro-keyboard-nav');
+      if (!el.hasAttribute('tabindex')) el.setAttribute('tabindex', '0');
+
+      el.addEventListener('keydown', function(pp) {
+        if (pp.code.indexOf('Arrow') !== 0) return;
+        pp.preventDefault();
         %s
       })
     }",
