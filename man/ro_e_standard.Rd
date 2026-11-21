@@ -62,6 +62,8 @@ is part of the legend that \code{\link[=ro_e_theme]{ro_e_theme()}} draws, so it 
 auto-detected from the chart orientation (left/right for column and line
 charts, up/down for horizontal bar charts made with
 \code{\link[echarts4r:e_flip_coords]{echarts4r::e_flip_coords()}}), or set explicitly with \code{axis}.
+\item \strong{Title first}: screen readers announce the chart title before the axes
+and data. Needs \code{renderer = "svg"} (the default).
 }
 }
 

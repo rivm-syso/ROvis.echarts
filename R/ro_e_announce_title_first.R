@@ -1,32 +1,37 @@
+# Internal helpers ---------------------------------------------------------
 
-#' Moves the title's SVG node to be the first child so screen readers
-#' announce it before the legend/axes/etc. instead of after.
+#' Make screen readers announce the chart title first
 #'
-#' @param fig An echarts4r/htmlwidget figure.
+#' Internal: called by [ro_e_standard()]. ECharts draws the title near the end
+#' of the SVG, so screen readers announce it after the axes and data. This
+#' moves the title's SVG group to the front.
 #'
-#' @return The figure, wrapped with an `htmlwidgets::onRender()` call.
+#' ECharts restores its own element order whenever it redraws (legend toggle,
+#' resize, and the resize [ro_e_theme()] does right after the first render), so
+#' the move is re-applied on every `finished` event, not only once. Does nothing
+#' for charts without a title, or with `renderer = "canvas"` (no SVG).
+#'
+#' @param e An echarts4r object.
+#'
+#' @return The modified echarts4r object, with an [htmlwidgets::onRender()]
+#' hook attached.
 #'
 #' @family echarts4r
 #' @keywords internal
-#' @examples
-#' \dontrun{
-#' library(echarts4r)
-#'
-#' mtcars |>
-#'  e_charts(wt) |>
-#'  e_scatter(mpg) |>
-#'  e_title("mtcars as title") |>
-#'  ro_e_theme() |>
-#'  ro_e_announce_title_first()
-#' }
 #' @importFrom htmlwidgets onRender
 ro_e_announce_title_first <- function(e) {
-  e <- htmlwidgets::onRender(e, "
+  onRender(
+    e,
+    "
   function(el) {
     var myChart = echarts.getInstanceByDom(el);
-    var titleText = myChart.getOption().title[0].text;
+    if (!myChart) return;
 
     function moveTitleFirst() {
+      var title = myChart.getOption().title;
+      var titleText = title && title[0] && title[0].text;
+      if (!titleText) return;
+
       var svg = el.querySelector('svg');
       if (!svg) return;
       var root = svg.querySelector('g');
@@ -48,10 +53,8 @@ ro_e_announce_title_first <- function(e) {
     }
 
     moveTitleFirst();
-    window.addEventListener('resize', function() {
-      setTimeout(moveTitleFirst, 100);
-    });
+    myChart.on('finished', moveTitleFirst);
   }
-  ")
-  return(e)
+  "
+  )
 }

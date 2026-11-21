@@ -10,6 +10,7 @@ package, and the repository moved from GitLab to GitHub.
   for every chart; `ro_e_theme()` stays available for styling only.
 - The `ro_e_theme()` legend is keyboard accessible: Tab focuses items, Enter/Space toggles a
   series, and screen readers announce each item as a button with its on/off state.
+- `ro_e_standard()` makes screen readers announce the chart title first (SVG renderer only).
 
 ### :hammer_and_wrench: Changed
 

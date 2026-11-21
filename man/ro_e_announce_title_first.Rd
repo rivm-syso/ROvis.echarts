@@ -2,32 +2,27 @@
 % Please edit documentation in R/ro_e_announce_title_first.R
 \name{ro_e_announce_title_first}
 \alias{ro_e_announce_title_first}
-\title{Moves the title's SVG node to be the first child so screen readers
-announce it before the legend/axes/etc. instead of after.}
+\title{Make screen readers announce the chart title first}
 \usage{
 ro_e_announce_title_first(e)
 }
 \arguments{
-\item{fig}{An echarts4r/htmlwidget figure.}
+\item{e}{An echarts4r object.}
 }
 \value{
-The figure, wrapped with an \code{htmlwidgets::onRender()} call.
+The modified echarts4r object, with an \code{\link[htmlwidgets:onRender]{htmlwidgets::onRender()}}
+hook attached.
 }
 \description{
-Moves the title's SVG node to be the first child so screen readers
-announce it before the legend/axes/etc. instead of after.
+Internal: called by \code{\link[=ro_e_standard]{ro_e_standard()}}. ECharts draws the title near the end
+of the SVG, so screen readers announce it after the axes and data. This
+moves the title's SVG group to the front.
 }
-\examples{
-\dontrun{
-library(echarts4r)
-
-mtcars |>
- e_charts(wt) |>
- e_scatter(mpg) |>
- e_title("mtcars as title") |>
- ro_e_theme() |>
- ro_e_announce_title_first()
-}
+\details{
+ECharts restores its own element order whenever it redraws (legend toggle,
+resize, and the resize \code{\link[=ro_e_theme]{ro_e_theme()}} does right after the first render), so
+the move is re-applied on every \code{finished} event, not only once. Does nothing
+for charts without a title, or with \code{renderer = "canvas"} (no SVG).
 }
 \seealso{
 Other echarts4r:
