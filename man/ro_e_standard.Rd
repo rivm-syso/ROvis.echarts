@@ -64,9 +64,9 @@ charts, up/down for horizontal bar charts made with
 \code{\link[echarts4r:e_flip_coords]{echarts4r::e_flip_coords()}}), or set explicitly with \code{axis}.
 \item \strong{Title first}: screen readers announce the chart title before the axes
 and data. Needs \code{renderer = "svg"} (the default).
-\item \strong{X-axis label order}: screen readers announce x-axis labels from left to
-right, also on time axes where ECharts draws the year label last. Needs
-\code{renderer = "svg"}.
+\item \strong{Axis label order}: screen readers announce axis labels in axis order
+(left to right on the x-axis, bottom to top on the y-axis), also on time
+axes where ECharts draws the year label last. Needs \code{renderer = "svg"}.
 }
 }
 
@@ -101,7 +101,7 @@ Other echarts4r:
 \code{\link[=ro_e_keyboard_nav]{ro_e_keyboard_nav()}},
 \code{\link[=ro_e_keyboard_nav_axis_js]{ro_e_keyboard_nav_axis_js()}},
 \code{\link[=ro_e_legend_a11y_js]{ro_e_legend_a11y_js()}},
-\code{\link[=ro_e_sort_xaxis_labels]{ro_e_sort_xaxis_labels()}},
+\code{\link[=ro_e_sort_axis_labels]{ro_e_sort_axis_labels()}},
 \code{\link[=ro_e_theme]{ro_e_theme()}},
 \code{\link[=ro_e_theme_list]{ro_e_theme_list()}}
 }

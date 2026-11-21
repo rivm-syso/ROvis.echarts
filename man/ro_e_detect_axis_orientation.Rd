@@ -28,7 +28,7 @@ Other echarts4r:
 \code{\link[=ro_e_keyboard_nav]{ro_e_keyboard_nav()}},
 \code{\link[=ro_e_keyboard_nav_axis_js]{ro_e_keyboard_nav_axis_js()}},
 \code{\link[=ro_e_legend_a11y_js]{ro_e_legend_a11y_js()}},
-\code{\link[=ro_e_sort_xaxis_labels]{ro_e_sort_xaxis_labels()}},
+\code{\link[=ro_e_sort_axis_labels]{ro_e_sort_axis_labels()}},
 \code{\link[=ro_e_standard]{ro_e_standard()}},
 \code{\link[=ro_e_theme]{ro_e_theme()}},
 \code{\link[=ro_e_theme_list]{ro_e_theme_list()}}
