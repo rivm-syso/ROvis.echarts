@@ -10,9 +10,14 @@
 #' @keywords internal
 #'
 #' @param axis_js Character. Output of ro_e_keyboard_nav_axis_js().
+#' @param announce Logical. When TRUE (default) the tooltip text is read out
+#'   to screen readers after every arrow key, via ro_e_tooltip_announce_js().
 #' @family echarts4r
 #' @return A single JavaScript string ready for htmlwidgets::onRender().
-ro_e_build_keyboard_nav_js <- function(axis_js) {
+ro_e_build_keyboard_nav_js <- function(axis_js, announce = TRUE) {
+  announce_js <- if (announce) ro_e_tooltip_announce_js() else ""
+  announce_call <- if (announce) "announceTooltip();" else ""
+
   sprintf(
     "function(el) {
       const myChart = echarts.getInstanceByDom(el)
@@ -30,14 +35,17 @@ ro_e_build_keyboard_nav_js <- function(axis_js) {
       }
       el.classList.add('ro-keyboard-nav');
       if (!el.hasAttribute('tabindex')) el.setAttribute('tabindex', '0');
-
+%s
       el.addEventListener('keydown', function(pp) {
         if (pp.code.indexOf('Arrow') !== 0) return;
         pp.preventDefault();
         %s
+        %s
       })
     }",
-    axis_js
+    announce_js,
+    axis_js,
+    announce_call
   )
 }
 

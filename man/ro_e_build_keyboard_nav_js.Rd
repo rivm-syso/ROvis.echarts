@@ -4,10 +4,13 @@
 \alias{ro_e_build_keyboard_nav_js}
 \title{Wraps the axis JS snippet in the full onRender callback template.}
 \usage{
-ro_e_build_keyboard_nav_js(axis_js)
+ro_e_build_keyboard_nav_js(axis_js, announce = TRUE)
 }
 \arguments{
 \item{axis_js}{Character. Output of ro_e_keyboard_nav_axis_js().}
+
+\item{announce}{Logical. When TRUE (default) the tooltip text is read out
+to screen readers after every arrow key, via ro_e_tooltip_announce_js().}
 }
 \value{
 A single JavaScript string ready for htmlwidgets::onRender().
@@ -29,7 +32,8 @@ Other echarts4r:
 \code{\link[=ro_e_sort_axis_labels]{ro_e_sort_axis_labels()}},
 \code{\link[=ro_e_standard]{ro_e_standard()}},
 \code{\link[=ro_e_theme]{ro_e_theme()}},
-\code{\link[=ro_e_theme_list]{ro_e_theme_list()}}
+\code{\link[=ro_e_theme_list]{ro_e_theme_list()}},
+\code{\link[=ro_e_tooltip_announce_js]{ro_e_tooltip_announce_js()}}
 }
 \concept{echarts4r}
 \keyword{internal}

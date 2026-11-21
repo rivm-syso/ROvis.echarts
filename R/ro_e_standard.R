@@ -17,7 +17,9 @@
 #' * **Arrow keys** move the tooltip across data points. The direction is
 #'   auto-detected from the chart orientation (left/right for column and line
 #'   charts, up/down for horizontal bar charts made with
-#'   [echarts4r::e_flip_coords()]), or set explicitly with `axis`.
+#'   [echarts4r::e_flip_coords()]), or set explicitly with `axis`. The chart
+#'   needs focus first: Tab to it or click it. Screen readers read out the
+#'   tooltip content at every step.
 #'
 #' * **Title first**: screen readers announce the chart title before the axes
 #'   and data. Needs `renderer = "svg"` (the default).

@@ -61,7 +61,9 @@ is part of the legend that \code{\link[=ro_e_theme]{ro_e_theme()}} draws, so it 
 \item \strong{Arrow keys} move the tooltip across data points. The direction is
 auto-detected from the chart orientation (left/right for column and line
 charts, up/down for horizontal bar charts made with
-\code{\link[echarts4r:e_flip_coords]{echarts4r::e_flip_coords()}}), or set explicitly with \code{axis}.
+\code{\link[echarts4r:e_flip_coords]{echarts4r::e_flip_coords()}}), or set explicitly with \code{axis}. The chart
+needs focus first: Tab to it or click it. Screen readers read out the
+tooltip content at every step.
 \item \strong{Title first}: screen readers announce the chart title before the axes
 and data. Needs \code{renderer = "svg"} (the default).
 \item \strong{Axis label order}: screen readers announce axis labels in axis order
@@ -103,6 +105,7 @@ Other echarts4r:
 \code{\link[=ro_e_legend_a11y_js]{ro_e_legend_a11y_js()}},
 \code{\link[=ro_e_sort_axis_labels]{ro_e_sort_axis_labels()}},
 \code{\link[=ro_e_theme]{ro_e_theme()}},
-\code{\link[=ro_e_theme_list]{ro_e_theme_list()}}
+\code{\link[=ro_e_theme_list]{ro_e_theme_list()}},
+\code{\link[=ro_e_tooltip_announce_js]{ro_e_tooltip_announce_js()}}
 }
 \concept{echarts4r}

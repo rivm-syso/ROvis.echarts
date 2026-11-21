@@ -293,7 +293,7 @@ dat_cases |>
 
 Interactive charts need to be accessible to keyboard-only users. `ro_e_standard()` applies `ro_e_theme()` and adds keyboard and screen reader support on top:
 
-* **Arrow keys** move the tooltip across data points. The direction is auto-detected from the chart orientation (left/right for column and line charts, up/down for horizontal bar charts). You can also set it explicitly with `axis`.
+* **Arrow keys** move the tooltip across data points. The direction is auto-detected from the chart orientation (left/right for column and line charts, up/down for horizontal bar charts). You can also set it explicitly with `axis`. The chart needs focus first: Tab to it or click it. Screen readers read out the tooltip content at every step.
 * **Tab** focuses legend items; **Enter** or **Space** toggles them. Screen readers announce each legend item as a button with its on/off state. The legend is part of `ro_e_theme()`, so this also works with the theme alone.
 * **Screen readers** announce the chart title first, before the axes and data, and read the axis labels in axis order (left to right, bottom to top). This needs `renderer = "svg"`, the default.
 
