@@ -21,6 +21,9 @@
 #'
 #' * **Title first**: screen readers announce the chart title before the axes
 #'   and data. Needs `renderer = "svg"` (the default).
+#' * **Axis label order**: screen readers announce axis labels in axis order
+#'   (left to right on the x-axis, bottom to top on the y-axis), also on time
+#'   axes where ECharts draws the year label last. Needs `renderer = "svg"`.
 #'
 #' @inheritParams ro_e_theme
 #' @param axis Character. Arrow-key direction for tooltip navigation. One of
@@ -74,5 +77,6 @@ ro_e_standard <- function(
       renderer = renderer
     ) |>
     ro_e_keyboard_nav(axis = axis) |>
-    ro_e_announce_title_first()
+    ro_e_announce_title_first() |>
+    ro_e_sort_axis_labels()
 }
