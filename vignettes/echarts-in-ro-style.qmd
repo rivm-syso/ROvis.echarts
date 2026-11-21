@@ -106,9 +106,9 @@ dat_weekly <- data.frame(
 )
 ```
 
-## Apply the RO theme
+## Apply the RO style
 
-`ro_e_theme()` applies the RO visual style to any `echarts4r` chart. It slots into an `echarts4r` pipeline the same way `ro_gg_theme()` does in `ggplot2.` Add it at the end, after all your chart layers:
+`ro_e_standard()` applies the RO visual style to any `echarts4r` chart and adds all accessibility features (see [Accessibility features](#accessibility-features)). It slots into an `echarts4r` pipeline the same way `ro_gg_theme()` does in `ggplot2`. Add it at the end, after all your chart layers:
 
 ```{r basic-bar}
 dat_cases |>
@@ -119,7 +119,7 @@ dat_cases |>
   e_x_axis(name = "Age class") |>
   e_y_axis(name = "Value") |>
   e_tooltip(trigger = "axis") |>
-  ro_e_theme()
+  ro_e_standard()
 ```
 
 ## Chart types
@@ -137,7 +137,7 @@ dat_cases |>
   e_x_axis(name = "Age class") |>
   e_y_axis(name = "Value") |>
   e_tooltip(trigger = "axis") |>
-  ro_e_theme(palette = "gender_con")
+  ro_e_standard(palette = "gender_con")
 ```
 
 ### Horizontal bar chart
@@ -154,7 +154,7 @@ dat_cases |>
   e_x_axis(name = "Value") |>
   e_y_axis(name = "Age class") |>
   e_tooltip(trigger = "axis") |>
-  ro_e_theme()
+  ro_e_standard()
 ```
 
 ### Line chart
@@ -168,7 +168,7 @@ dat_weekly |>
   e_x_axis(name = "Week") |>
   e_y_axis(name = "Value") |>
   e_tooltip(trigger = "axis") |>
-  ro_e_theme(palette = "gender_con")
+  ro_e_standard(palette = "gender_con")
 ```
 
 A note on x-axis variable types: if your x-axis variable is numeric (like a year or week number), `echarts4r` treats it as a value axis. The RO theme shows grid lines on all value axes, so you will end up with vertical grid lines as well as horizontal ones. To avoid this, make the x-axis variable a factor with explicit levels. That way `echarts4r` uses a category axis, which has no grid lines, while the order of the values stays correct. For example, we achieved this by:
@@ -191,7 +191,7 @@ data_multi |>
   e_charts(year) |>
   e_bar(women, name = "Women") |>
   e_bar(men, name = "Men") |>
-  ro_e_theme(palette = "gender_con")
+  ro_e_standard(palette = "gender_con")
 ```
 
 ### Grouped trendline
@@ -223,12 +223,12 @@ tab_cases_week_by_prov |>
   e_title("Cases per week for 5 Dutch provinces") |>
   e_legend() |>
   e_tooltip(trigger = "item") |>
-  ro_e_theme()
+  ro_e_standard()
 ```
 
 ## Aspect ratio
 
-By default, `ro_e_theme()` enforces fixed aspect ratios in accordance with the RO data visualisation guidelines: the **total element** (title + chart + legend) is **2:1 width-to-height**, and the inner **plot area** (grid only, without axis labels or legend) is **3:1 width-to-height**. Both ratios update automatically whenever the container width changes, for example when the browser window is resized or a Shiny sidebar is toggled. This is controlled by the `fixed_aspect` argument, which defaults to `TRUE`.
+By default, `ro_e_standard()` enforces fixed aspect ratios in accordance with the RO data visualisation guidelines: the **total element** (title + chart + legend) is **2:1 width-to-height**, and the inner **plot area** (grid only, without axis labels or legend) is **3:1 width-to-height**. Both ratios update automatically whenever the container width changes, for example when the browser window is resized or a Shiny sidebar is toggled. This is controlled by the `fixed_aspect` argument, which defaults to `TRUE`.
 
 ```{r aspect-default}
 dat_cases |>
@@ -239,7 +239,7 @@ dat_cases |>
   e_x_axis(name = "Age class") |>
   e_y_axis(name = "Value") |>
   e_tooltip(trigger = "axis") |>
-  ro_e_theme()
+  ro_e_standard()
 ```
 
 Set `fixed_aspect = FALSE` when you need to control the chart height yourself, for example inside a Shiny app with a fixed-height container or a dashboard where the chart must fill an exact pixel area. The chart then keeps the height you specify (via `e_charts(height = …)` or the chunk's `fig.height` option) and stops adjusting it on resize:
@@ -253,12 +253,12 @@ dat_cases |>
   e_x_axis(name = "Age class") |>
   e_y_axis(name = "Value") |>
   e_tooltip(trigger = "axis") |>
-  ro_e_theme(fixed_aspect = FALSE)
+  ro_e_standard(fixed_aspect = FALSE)
 ```
 
 ## Color palettes
 
-`ro_e_theme()` accepts a `palette` argument. The available palettes are the same ones used by `ro_color_palette()`:
+`ro_e_standard()` accepts a `palette` argument. The available palettes are the same ones used by `ro_color_palette()`:
 
 * `"categorical"` (default) for general categorical data
 * `"gender_con"` for conventional gender colors
@@ -275,7 +275,7 @@ ro_show_colors("gender_unc")
 ro_show_colors("greys")
 ```
 
-Apply a different palette by passing its name to `ro_e_theme()`:
+Apply a different palette by passing its name to `ro_e_standard()`:
 
 ```{r palette-example}
 dat_cases |>
@@ -286,10 +286,10 @@ dat_cases |>
   e_x_axis(name = "Age class") |>
   e_y_axis(name = "Value") |>
   e_tooltip(trigger = "axis") |>
-  ro_e_theme(palette = "gender_unc")
+  ro_e_standard(palette = "gender_unc")
 ```
 
-## Keyboard navigation
+## Accessibility features
 
 Interactive charts need to be accessible to keyboard-only users. `ro_e_standard()` applies `ro_e_theme()` and adds keyboard and screen reader support on top:
 
@@ -297,7 +297,7 @@ Interactive charts need to be accessible to keyboard-only users. `ro_e_standard(
 * **Tab** focuses legend items; **Enter** or **Space** toggles them. Screen readers announce each legend item as a button with its on/off state. The legend is part of `ro_e_theme()`, so this also works with the theme alone.
 * **Screen readers** announce the chart title first, before the axes and data. This needs `renderer = "svg"`, the default.
 
-Use `ro_e_standard()` instead of `ro_e_theme()` as the last step in the pipeline. It takes the same arguments as `ro_e_theme()`, plus `axis`:
+Try it on the line chart: Tab to the chart and use the arrow keys, or Tab further to the legend. `ro_e_standard()` takes the same styling arguments as `ro_e_theme()`, plus `axis`:
 
 ```{r keyboard-nav}
 dat_weekly |>
@@ -353,3 +353,18 @@ dat_cases |>
   ro_e_standard()
 ```
 
+## Styling only
+
+For a chart that `ro_e_standard()` doesn't cover, apply only the RO styling with `ro_e_theme()`. It takes the same styling arguments, but it adds **no** accessibility features apart from the keyboard-accessible legend, so prefer `ro_e_standard()` whenever you can.
+
+```{r styling-only}
+dat_cases |>
+  filter(sex == "Women") |>
+  e_charts(agegroup) |>
+  e_bar(n, name = "Women") |>
+  e_title("Cases by age group", "Styling only") |>
+  e_x_axis(name = "Age class") |>
+  e_y_axis(name = "Value") |>
+  e_tooltip(trigger = "axis") |>
+  ro_e_theme()
+```
