@@ -1,39 +1,46 @@
+# Internal helpers ---------------------------------------------------------
 
-#' Reorders x-axis label text nodes to match their left-to-right
-#' (visual order) on-screen order, since echarts' anti-overlap label layout
-#' can append them out of sequence. This ensures screen readers announce the
-#' labels in left-to-right-visual order instead of DOM-insertion order.
+#' Make screen readers announce x-axis labels in left-to-right order
 #'
-#' @param fig An echarts4r/htmlwidget figure.
+#' Internal: called by [ro_e_standard()]. ECharts does not always add x-axis
+#' labels to the SVG in their visual order. On a time axis, for example, the
+#' year label ("2024") is drawn after the month labels, so screen readers
+#' announce it last. This reorders the label nodes to match their
+#' left-to-right position on screen.
 #'
-#' @return The figure, wrapped with an `htmlwidgets::onRender()` call.
+#' ECharts restores its own element order whenever it redraws (legend toggle,
+#' resize, and the resize [ro_e_theme()] does right after the first render), so
+#' the sort is re-applied on every `finished` event, not only once. Does nothing
+#' for charts without a grid or x-axis (e.g. pie charts), or with
+#' `renderer = "canvas"` (no SVG).
+#'
+#' @param e An echarts4r object.
+#'
+#' @return The modified echarts4r object, with an [htmlwidgets::onRender()]
+#' hook attached.
 #'
 #' @family echarts4r
 #' @keywords internal
-#' @examples
-#' \dontrun{
-#' library(echarts4r)
-#'
-#' mtcars |>
-#'  e_charts(wt) |>
-#'  e_scatter(mpg) |>
-#'  e_title("mtcars as title") |>
-#'  ro_e_theme() |>
-#'  ro_e_sort_xaxis_labels()
-#' }
 #' @importFrom htmlwidgets onRender
 ro_e_sort_xaxis_labels <- function(e) {
-  e <- htmlwidgets::onRender(e, "
+  onRender(
+    e,
+    "
   function(el) {
     var myChart = echarts.getInstanceByDom(el);
+    if (!myChart) return;
 
     function sortXAxisLabels() {
       var svg = el.querySelector('svg');
       if (!svg) return;
 
       var model = myChart.getModel();
-      var gridRect = model.getComponent('grid', 0).coordinateSystem.getRect();
-      var axisExtent = model.getComponent('xAxis', 0).axis.getExtent();
+      var grid = model.getComponent('grid', 0);
+      var xAxis = model.getComponent('xAxis', 0);
+      if (!grid || !grid.coordinateSystem || !xAxis || !xAxis.axis) return;
+
+      var gridRect = grid.coordinateSystem.getRect();
+      var axisExtent = xAxis.axis.getExtent();
       var svgRect = svg.getBoundingClientRect();
       var gridBottom = gridRect.y + gridRect.height;
       var axisLeft = Math.min(axisExtent[0], axisExtent[1]);
@@ -69,10 +76,8 @@ ro_e_sort_xaxis_labels <- function(e) {
     }
 
     sortXAxisLabels();
-    window.addEventListener('resize', function() {
-      setTimeout(sortXAxisLabels, 100);
-    });
+    myChart.on('finished', sortXAxisLabels);
   }
-  ")
-  return(e)
+  "
+  )
 }

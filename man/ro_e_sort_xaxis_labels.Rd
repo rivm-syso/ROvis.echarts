@@ -2,36 +2,30 @@
 % Please edit documentation in R/ro_e_sort_xaxis_labels.R
 \name{ro_e_sort_xaxis_labels}
 \alias{ro_e_sort_xaxis_labels}
-\title{Reorders x-axis label text nodes to match their left-to-right
-(visual order) on-screen order, since echarts' anti-overlap label layout
-can append them out of sequence. This ensures screen readers announce the
-labels in left-to-right-visual order instead of DOM-insertion order.}
+\title{Make screen readers announce x-axis labels in left-to-right order}
 \usage{
 ro_e_sort_xaxis_labels(e)
 }
 \arguments{
-\item{fig}{An echarts4r/htmlwidget figure.}
+\item{e}{An echarts4r object.}
 }
 \value{
-The figure, wrapped with an \code{htmlwidgets::onRender()} call.
+The modified echarts4r object, with an \code{\link[htmlwidgets:onRender]{htmlwidgets::onRender()}}
+hook attached.
 }
 \description{
-Reorders x-axis label text nodes to match their left-to-right
-(visual order) on-screen order, since echarts' anti-overlap label layout
-can append them out of sequence. This ensures screen readers announce the
-labels in left-to-right-visual order instead of DOM-insertion order.
+Internal: called by \code{\link[=ro_e_standard]{ro_e_standard()}}. ECharts does not always add x-axis
+labels to the SVG in their visual order. On a time axis, for example, the
+year label ("2024") is drawn after the month labels, so screen readers
+announce it last. This reorders the label nodes to match their
+left-to-right position on screen.
 }
-\examples{
-\dontrun{
-library(echarts4r)
-
-mtcars |>
- e_charts(wt) |>
- e_scatter(mpg) |>
- e_title("mtcars as title") |>
- ro_e_theme() |>
- ro_e_sort_xaxis_labels()
-}
+\details{
+ECharts restores its own element order whenever it redraws (legend toggle,
+resize, and the resize \code{\link[=ro_e_theme]{ro_e_theme()}} does right after the first render), so
+the sort is re-applied on every \code{finished} event, not only once. Does nothing
+for charts without a grid or x-axis (e.g. pie charts), or with
+\code{renderer = "canvas"} (no SVG).
 }
 \seealso{
 Other echarts4r:

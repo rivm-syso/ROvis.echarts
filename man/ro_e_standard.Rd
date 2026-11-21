@@ -64,6 +64,9 @@ charts, up/down for horizontal bar charts made with
 \code{\link[echarts4r:e_flip_coords]{echarts4r::e_flip_coords()}}), or set explicitly with \code{axis}.
 \item \strong{Title first}: screen readers announce the chart title before the axes
 and data. Needs \code{renderer = "svg"} (the default).
+\item \strong{X-axis label order}: screen readers announce x-axis labels from left to
+right, also on time axes where ECharts draws the year label last. Needs
+\code{renderer = "svg"}.
 }
 }
 
