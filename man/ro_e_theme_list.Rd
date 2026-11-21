@@ -27,7 +27,8 @@ Other echarts4r:
 \code{\link[=ro_e_keyboard_nav_axis_js]{ro_e_keyboard_nav_axis_js()}},
 \code{\link[=ro_e_legend_a11y_js]{ro_e_legend_a11y_js()}},
 \code{\link[=ro_e_standard]{ro_e_standard()}},
-\code{\link[=ro_e_theme]{ro_e_theme()}}
+\code{\link[=ro_e_theme]{ro_e_theme()}},
+\code{\link[=ro_e_tooltip_announce_js]{ro_e_tooltip_announce_js()}}
 }
 \concept{echarts4r}
 \keyword{internal}

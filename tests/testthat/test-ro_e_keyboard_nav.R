@@ -40,3 +40,22 @@ test_that("ro_e_keyboard_nav listens on the chart, not on the whole page", {
   expect_match(js, "setAttribute('tabindex', '0')", fixed = TRUE)
   expect_match(js, ":focus-visible", fixed = TRUE)
 })
+
+test_that("ro_e_keyboard_nav announces the tooltip to screen readers", {
+  js <- ro_e_build_keyboard_nav_js(ro_e_keyboard_nav_axis_js("horizontal"))
+
+  expect_match(js, "aria-live', 'polite'", fixed = TRUE)
+  expect_match(js, "role', 'status'", fixed = TRUE)
+  expect_match(js, "announceTooltip();", fixed = TRUE)
+})
+
+test_that("tooltip announcement can be switched off", {
+  js <- ro_e_build_keyboard_nav_js(
+    ro_e_keyboard_nav_axis_js("horizontal"),
+    announce = FALSE
+  )
+
+  expect_no_match(js, "aria-live", fixed = TRUE)
+  expect_no_match(js, "announceTooltip", fixed = TRUE)
+  expect_match(js, "el.addEventListener('keydown'", fixed = TRUE)
+})
