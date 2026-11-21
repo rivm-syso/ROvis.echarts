@@ -19,6 +19,9 @@
 #'   charts, up/down for horizontal bar charts made with
 #'   [echarts4r::e_flip_coords()]), or set explicitly with `axis`.
 #'
+#' * **Title first**: screen readers announce the chart title before the axes
+#'   and data. Needs `renderer = "svg"` (the default).
+#'
 #' @inheritParams ro_e_theme
 #' @param axis Character. Arrow-key direction for tooltip navigation. One of
 #' `"horizontal"` (ArrowLeft / ArrowRight), `"vertical"` (ArrowUp / ArrowDown),
@@ -56,6 +59,13 @@ ro_e_standard <- function(
   renderer = "svg",
   axis = NULL
 ) {
+  if (identical(renderer, "canvas")) {
+    cli_warn(c(
+      "!" = "The screen reader fixes in {.fn ro_e_standard} need {.code renderer = \"svg\"}.",
+      "i" = "With {.code renderer = \"canvas\"} they are skipped."
+    ))
+  }
+
   e |>
     ro_e_theme(
       palette = palette,
@@ -63,5 +73,6 @@ ro_e_standard <- function(
       font = font,
       renderer = renderer
     ) |>
-    ro_e_keyboard_nav(axis = axis)
+    ro_e_keyboard_nav(axis = axis) |>
+    ro_e_announce_title_first()
 }

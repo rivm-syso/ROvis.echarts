@@ -22,6 +22,7 @@ yAxis. Check whether e$x$opts$yAxis has a non-NULL \code{data} element.
 }
 \seealso{
 Other echarts4r:
+\code{\link[=ro_e_announce_title_first]{ro_e_announce_title_first()}},
 \code{\link[=ro_e_build_keyboard_nav_js]{ro_e_build_keyboard_nav_js()}},
 \code{\link[=ro_e_build_onrender_js]{ro_e_build_onrender_js()}},
 \code{\link[=ro_e_keyboard_nav]{ro_e_keyboard_nav()}},
