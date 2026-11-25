@@ -4,6 +4,8 @@ Version: 0.1.0
 Authors@R: person("ROvis team", email = "spin@rivm.nl", role = c("cre", "aut"))
 Description: Provides accessible, Echart plots and themed visualizations with Rijksoverheid styling.
 License: EUPL (>= 1.2)
+URL: https://rivm-syso.github.io/ROvis.echarts/, https://github.com/rivm-syso/ROvis.echarts
+BugReports: https://github.com/rivm-syso/ROvis.echarts/issues
 Imports: 
     cli,
     dplyr (>= 1.1.4),
