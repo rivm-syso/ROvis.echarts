@@ -1,0 +1,115 @@
+# ROvis.echarts
+
+## Rijksoverheid Visualisatie - echarts
+
+## Description
+
+A tool to uniformly visualise graphs in ‘echarts4r’ using standardized
+Rijksoverheid (Dutch National Government) styling. This package is part
+of the \[ROvis umbrella package\]
+(<https://github.com/rivm-syso/ROvis>).
+
+## Installation
+
+Install the latest release from
+[R-universe](https://rivm-syso.r-universe.dev):
+
+``` r
+
+install.packages(
+  "ROvis.echarts",
+  repos = c("https://rivm-syso.r-universe.dev", "https://cloud.r-project.org")
+)
+```
+
+Install the development version from GitHub:
+
+``` r
+
+# install.packages("pak")
+pak::pak("rivm-syso/ROvis.echarts")
+```
+
+A version number ending in `.9000` is a development version.
+
+## Usage
+
+``` r
+
+library(ROvis.echarts)
+
+mtcars |>
+  e_charts(wt) |>
+  e_scatter(mpg) |>
+  ro_e_theme()
+```
+
+## Support
+
+First point of contact for questions: ROvisteam (<spin@rivm.nl>)
+
+## Contributing
+
+We welcome contributions! Before you start, **please read
+[CONTRIBUTING.md](https://rivm-syso.github.io/ROvis.echarts/dev/CONTRIBUTING.md)**.
+It explains how to open an issue, our git etiquette (branches, commits,
+pull requests and reviews) and our code standards. See
+[CONTRIBUTORS.md](https://rivm-syso.github.io/ROvis.echarts/dev/CONTRIBUTORS.md)
+for the list of contributors.
+
+## Instructions for developers
+
+For information about R package development, check the [R Packages
+book](https://r-pkgs.org/). Below we describe the most important
+guidelines and practicalities.
+
+### Requirements
+
+We use the `testthat`, `lintr` and `roxygen2` package for development of
+tests, code style checks and automatic documentation. We also use the
+`devtools` and `usethis` package during development to adhere to
+standards for R packages and make developing easier! Install them in
+your Rstudio environment:
+
+``` r
+
+install.packages(testthat)
+install.packages(lintr)
+install.packages(roxygen2)
+install.packages(quarto)
+install.packages(pkgdown)
+install.packages(devtools)
+install.packages(usethis)
+```
+
+### Guidelines
+
+Type
+[`devtools::load_all()`](https://devtools.r-lib.org/reference/load_all.html)
+in your console each time you start developing. This loads all
+dependencies and non-exported functions in the NAMESPACE. This makes
+developing a lot easier!
+
+To ensure code standardization and quality, follow these guidelines: -
+Add tests with
+[`usethis::use_test()`](https://usethis.r-lib.org/reference/use_r.html) -
+Add a new package dependency to the DESCRIPTION file with
+[`usethis::use_package()`](https://usethis.r-lib.org/reference/use_package.html).
+We use the `min_version` argument to specify a minimum version. - Add a
+new function dependency to the NAMESPACE with
+[`usethis::use_import_from()`](https://usethis.r-lib.org/reference/use_import_from.html) -
+Add documentation to new functions by inserting a roxygen skeleton and
+use
+[`devtools::document()`](https://devtools.r-lib.org/reference/document.html)
+to create automatic documentation in the `man` folder
+
+## Authors and acknowledgment
+
+This R package was created by ROvis team (<spin@rivm.nl>).
+
+## License
+
+The code can be re-used under license [EUPL
+v.1.2](https://eupl.eu/1.2/en/). See
+[LICENCE](https://rivm-syso.github.io/ROvis.echarts/dev/LICENCE) for
+details.
