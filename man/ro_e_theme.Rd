@@ -47,7 +47,12 @@ pipeline.
 
 The theme is generated at call time from \code{\link[ROvis.utils:ro_color]{ROvis.utils::ro_color()}} and \code{\link[ROvis.utils:ro_color_palette]{ROvis.utils::ro_color_palette()}}.
 A custom accessible HTML legend is always included. The native ECharts
-legend is replaced automatically to meet the RO accessibility spec.
+legend is replaced automatically to meet the RO accessibility spec: legend
+items can be reached with Tab and toggled with Enter or Space.
+
+\code{ro_e_theme()} is styling only. It does not add the other accessibility
+features, such as arrow-key navigation of data points. Use \code{\link[=ro_e_standard]{ro_e_standard()}}
+for that (recommended).
 }
 \section{RO style applied}{
 
@@ -75,18 +80,22 @@ mtcars |>
 \seealso{
 \itemize{
 \item \code{\link[ROvis.ggplot2:ro_gg_theme]{ROvis.ggplot2::ro_gg_theme()}} for the ggplot2 equivalent.
-\item \code{\link[=ro_e_keyboard_nav]{ro_e_keyboard_nav()}} to add keyboard accessibility on top of the theme.
+\item \code{\link[=ro_e_standard]{ro_e_standard()}} for the theme plus all accessibility features.
 \item \code{\link[ROvis.utils:ro_color_palette]{ROvis.utils::ro_color_palette()}} to inspect the available palettes.
 \item \code{\link[ROvis.utils:ro_color]{ROvis.utils::ro_color()}} to look up individual RO color hex codes.
 }
 
 Other echarts4r:
+\code{\link[=ro_e_announce_title_first]{ro_e_announce_title_first()}},
 \code{\link[=ro_e_build_keyboard_nav_js]{ro_e_build_keyboard_nav_js()}},
 \code{\link[=ro_e_build_onrender_js]{ro_e_build_onrender_js()}},
 \code{\link[=ro_e_detect_axis_orientation]{ro_e_detect_axis_orientation()}},
 \code{\link[=ro_e_keyboard_nav]{ro_e_keyboard_nav()}},
 \code{\link[=ro_e_keyboard_nav_axis_js]{ro_e_keyboard_nav_axis_js()}},
-\code{\link[=ro_e_keyboard_nav_legend_js]{ro_e_keyboard_nav_legend_js()}},
-\code{\link[=ro_e_theme_list]{ro_e_theme_list()}}
+\code{\link[=ro_e_legend_a11y_js]{ro_e_legend_a11y_js()}},
+\code{\link[=ro_e_sort_axis_labels]{ro_e_sort_axis_labels()}},
+\code{\link[=ro_e_standard]{ro_e_standard()}},
+\code{\link[=ro_e_theme_list]{ro_e_theme_list()}},
+\code{\link[=ro_e_tooltip_announce_js]{ro_e_tooltip_announce_js()}}
 }
 \concept{echarts4r}
