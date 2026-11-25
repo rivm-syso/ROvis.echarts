@@ -12,6 +12,7 @@ package, and the repository moved from GitLab to GitHub.
   series, and screen readers announce each item as a button with its on/off state.
 - Arrow-key navigation reads the tooltip out to screen readers (via a hidden `aria-live`
   region), so screen reader users hear the values, not only sighted keyboard users.
+- `ro_e_standard()` makes screen readers announce the chart title first (SVG renderer only).
 
 ### :hammer_and_wrench: Changed
 
