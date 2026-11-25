@@ -1,51 +1,51 @@
 # Internal helpers ---------------------------------------------------------
 
-#' Generates the JavaScript snippet for legend-toggle keyboard navigation.
+#' Wraps the axis JS snippet in the full onRender callback template.
 #'
-#' One JS line is emitted per entry in series_keys.
-#'
-#' Key name format: paste0("Key", toupper(names(series_keys)))
-#' e.g. c(w = "Women", m = "Men") becomes 'KeyW', 'KeyM'
-#'
-#' @keywords internal
-#' @family echarts4r
-#' @param series_keys Named character vector, or NULL.
-#'
-#' @return A character string of JavaScript, or "" when series_keys is NULL.
-ro_e_keyboard_nav_legend_js <- function(series_keys) {
-  if (is.null(series_keys)) {
-    return("")
-  }
-
-  js_lines <- sprintf(
-    "if (pp.code == 'Key%s') myChart.dispatchAction({ type: 'legendToggleSelect', name: '%s' });",
-    toupper(names(series_keys)),
-    series_keys
-  )
-  paste(js_lines, collapse = "\n")
-}
-
-#' Wraps axis and legend JS snippets in the full onRender callback template.
+#' The listener sits on the chart element, not on `window`, so the arrow keys
+#' only act on the chart that has focus (not on every chart on the page, and
+#' not while typing in an input). The chart gets `tabindex="0"` so Tab reaches
+#' it, and a focus outline for keyboard focus only (`:focus-visible`).
 #'
 #' @keywords internal
 #'
 #' @param axis_js Character. Output of ro_e_keyboard_nav_axis_js().
-#' @param legend_js Character. Output of ro_e_keyboard_nav_legend_js().
+#' @param announce Logical. When TRUE (default) the tooltip text is read out
+#'   to screen readers after every arrow key, via ro_e_tooltip_announce_js().
 #' @family echarts4r
 #' @return A single JavaScript string ready for htmlwidgets::onRender().
-ro_e_build_keyboard_nav_js <- function(axis_js, legend_js) {
+ro_e_build_keyboard_nav_js <- function(axis_js, announce = TRUE) {
+  announce_js <- if (announce) ro_e_tooltip_announce_js() else ""
+  announce_call <- if (announce) "announceTooltip();" else ""
+
   sprintf(
     "function(el) {
       const myChart = echarts.getInstanceByDom(el)
+      if (!myChart) return;
       var idx = 0
       var sidx = 0
-      window.addEventListener('keydown', function(pp) {
+
+      if (!document.getElementById('ro-keyboard-nav-style')) {
+        var style = document.createElement('style');
+        style.id = 'ro-keyboard-nav-style';
+        style.textContent =
+          '.ro-keyboard-nav:focus { outline: none; }' +
+          '.ro-keyboard-nav:focus-visible { outline: 2px solid #333333; outline-offset: 2px; }';
+        document.head.appendChild(style);
+      }
+      el.classList.add('ro-keyboard-nav');
+      if (!el.hasAttribute('tabindex')) el.setAttribute('tabindex', '0');
+%s
+      el.addEventListener('keydown', function(pp) {
+        if (pp.code.indexOf('Arrow') !== 0) return;
+        pp.preventDefault();
         %s
         %s
       })
     }",
+    announce_js,
     axis_js,
-    legend_js
+    announce_call
   )
 }
 
@@ -68,6 +68,8 @@ ro_e_build_keyboard_nav_js <- function(axis_js, legend_js) {
 #' @param font_family Font family string resolved by ro_e_theme().
 #' @param fixed_aspect Logical. When TRUE the chart enforces a 2:1 width:height
 #'   aspect ratio and stays responsive on resize.
+#' @param legend_a11y Logical. When TRUE (default) the HTML legend gets keyboard
+#'   and screen reader support from ro_e_legend_a11y_js().
 #' @family echarts4r
 #' @return A JavaScript string for htmlwidgets::onRender().
 ro_e_build_onrender_js <- function(
@@ -75,7 +77,8 @@ ro_e_build_onrender_js <- function(
   series_names,
   font_family,
   name_color,
-  fixed_aspect = TRUE
+  fixed_aspect = TRUE,
+  legend_a11y = TRUE
 ) {
   colors_json <- jsonlite::toJSON(colors, auto_unbox = FALSE)
   names_json <- jsonlite::toJSON(series_names, auto_unbox = FALSE)
@@ -366,9 +369,12 @@ ro_e_build_onrender_js <- function(
         chart.on('legendselectchanged', function(event) {
           selected = event.selected;
           container.querySelectorAll('.ro-legend-item').forEach(function(item) {
-            if (selected[item.dataset.name]) styleNormal(item); else styleHidden(item);
+            var isSelected = !!selected[item.dataset.name];
+            if (isSelected) styleNormal(item); else styleHidden(item);
           });
         });
+
+        __LEGEND_A11Y__
       }
 
       // Defer one tick so the browser has painted and offsetHeight is stable.
@@ -396,5 +402,11 @@ ro_e_build_onrender_js <- function(
   js <- gsub("__NAMES__", names_json, js, fixed = TRUE)
   js <- gsub("__FONT_FAMILY__", font_family_json, js, fixed = TRUE)
   js <- gsub("__NAME_COLOR__", name_color_json, js, fixed = TRUE)
+  js <- gsub(
+    "__LEGEND_A11Y__",
+    if (legend_a11y) ro_e_legend_a11y_js() else "",
+    js,
+    fixed = TRUE
+  )
   js
 }

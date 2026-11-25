@@ -11,7 +11,12 @@
 #'
 #' The theme is generated at call time from [ROvis.utils::ro_color()] and [ROvis.utils::ro_color_palette()].
 #' A custom accessible HTML legend is always included. The native ECharts
-#' legend is replaced automatically to meet the RO accessibility spec.
+#' legend is replaced automatically to meet the RO accessibility spec: legend
+#' items can be reached with Tab and toggled with Enter or Space.
+#'
+#' `ro_e_theme()` is styling only. It does not add the other accessibility
+#' features, such as arrow-key navigation of data points. Use [ro_e_standard()]
+#' for that (recommended).
 #'
 #' @section RO style applied:
 #' * Series colors from [ro_color_palette()] (default: `"categorical"`).
@@ -44,7 +49,7 @@
 #'
 #' @seealso
 #' * [ROvis.ggplot2::ro_gg_theme()] for the ggplot2 equivalent.
-#' * [ro_e_keyboard_nav()] to add keyboard accessibility on top of the theme.
+#' * [ro_e_standard()] for the theme plus all accessibility features.
 #' * [ROvis.utils::ro_color_palette()] to inspect the available palettes.
 #' * [ROvis.utils::ro_color()] to look up individual RO color hex codes.
 #'

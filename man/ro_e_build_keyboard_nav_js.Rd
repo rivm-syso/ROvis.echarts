@@ -2,20 +2,24 @@
 % Please edit documentation in R/ro_e_build.R
 \name{ro_e_build_keyboard_nav_js}
 \alias{ro_e_build_keyboard_nav_js}
-\title{Wraps axis and legend JS snippets in the full onRender callback template.}
+\title{Wraps the axis JS snippet in the full onRender callback template.}
 \usage{
-ro_e_build_keyboard_nav_js(axis_js, legend_js)
+ro_e_build_keyboard_nav_js(axis_js, announce = TRUE)
 }
 \arguments{
 \item{axis_js}{Character. Output of ro_e_keyboard_nav_axis_js().}
 
-\item{legend_js}{Character. Output of ro_e_keyboard_nav_legend_js().}
+\item{announce}{Logical. When TRUE (default) the tooltip text is read out
+to screen readers after every arrow key, via ro_e_tooltip_announce_js().}
 }
 \value{
 A single JavaScript string ready for htmlwidgets::onRender().
 }
 \description{
-Wraps axis and legend JS snippets in the full onRender callback template.
+The listener sits on the chart element, not on \code{window}, so the arrow keys
+only act on the chart that has focus (not on every chart on the page, and
+not while typing in an input). The chart gets \code{tabindex="0"} so Tab reaches
+it, and a focus outline for keyboard focus only (\verb{:focus-visible}).
 }
 \seealso{
 Other echarts4r:
@@ -23,9 +27,11 @@ Other echarts4r:
 \code{\link[=ro_e_detect_axis_orientation]{ro_e_detect_axis_orientation()}},
 \code{\link[=ro_e_keyboard_nav]{ro_e_keyboard_nav()}},
 \code{\link[=ro_e_keyboard_nav_axis_js]{ro_e_keyboard_nav_axis_js()}},
-\code{\link[=ro_e_keyboard_nav_legend_js]{ro_e_keyboard_nav_legend_js()}},
+\code{\link[=ro_e_legend_a11y_js]{ro_e_legend_a11y_js()}},
+\code{\link[=ro_e_standard]{ro_e_standard()}},
 \code{\link[=ro_e_theme]{ro_e_theme()}},
-\code{\link[=ro_e_theme_list]{ro_e_theme_list()}}
+\code{\link[=ro_e_theme_list]{ro_e_theme_list()}},
+\code{\link[=ro_e_tooltip_announce_js]{ro_e_tooltip_announce_js()}}
 }
 \concept{echarts4r}
 \keyword{internal}
