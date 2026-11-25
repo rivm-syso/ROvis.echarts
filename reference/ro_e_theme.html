@@ -5,13 +5,21 @@ equivalent of ROvis.ggplot2::ro_gg_theme() and is designed to slot into any echa
 pipeline.
 The theme is generated at call time from ROvis.utils::ro_color() and ROvis.utils::ro_color_palette().
 A custom accessible HTML legend is always included. The native ECharts
-legend is replaced automatically to meet the RO accessibility spec."><meta property="og:description" content="ro_e_theme() applies the Rijksoverheid (RO) visual style to
+legend is replaced automatically to meet the RO accessibility spec: legend
+items can be reached with Tab and toggled with Enter or Space.
+ro_e_theme() is styling only. It does not add the other accessibility
+features, such as arrow-key navigation of data points. Use ro_e_standard()
+for that (recommended)."><meta property="og:description" content="ro_e_theme() applies the Rijksoverheid (RO) visual style to
 an echarts4r chart. It is the echarts
 equivalent of ROvis.ggplot2::ro_gg_theme() and is designed to slot into any echarts4r
 pipeline.
 The theme is generated at call time from ROvis.utils::ro_color() and ROvis.utils::ro_color_palette().
 A custom accessible HTML legend is always included. The native ECharts
-legend is replaced automatically to meet the RO accessibility spec."></head><body>
+legend is replaced automatically to meet the RO accessibility spec: legend
+items can be reached with Tab and toggled with Enter or Space.
+ro_e_theme() is styling only. It does not add the other accessibility
+features, such as arrow-key navigation of data points. Use ro_e_standard()
+for that (recommended)."><meta property="og:image" content="https://rivm-syso.github.io/ROvis.echarts/logo.png"></head><body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
 
 
@@ -19,7 +27,7 @@ legend is replaced automatically to meet the RO accessibility spec."></head><bod
 
     <a class="navbar-brand me-2" href="../index.html">ROvis.echarts</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.1.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -35,6 +43,7 @@ legend is replaced automatically to meet the RO accessibility spec."></head><bod
 <li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
       </ul><ul class="navbar-nav"><li class="nav-item"><form class="form-inline" role="search">
  <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="../search.json"></form></li>
+<li class="nav-item"><a class="external-link nav-link" href="https://github.com/rivm-syso/ROvis.echarts/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
       </ul></div>
 
 
@@ -42,9 +51,8 @@ legend is replaced automatically to meet the RO accessibility spec."></head><bod
 </nav><div class="container template-reference-topic">
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
-
-      <h1>Apply the RO echarts theme to an echarts4r object</h1>
-
+      <img src="../logo.png" class="logo" alt=""><h1>Apply the RO echarts theme to an echarts4r object</h1>
+      <small class="dont-index">Source: <a href="https://github.com/rivm-syso/ROvis.echarts/blob/v0.1.0/R/ro_e_theme.R" class="external-link"><code>R/ro_e_theme.R</code></a></small>
       <div class="d-none name"><code>ro_e_theme.Rd</code></div>
     </div>
 
@@ -53,9 +61,13 @@ legend is replaced automatically to meet the RO accessibility spec."></head><bod
 an <a href="https://echarts4r.john-coene.com/" class="external-link">echarts4r</a> chart. It is the echarts
 equivalent of <code>ROvis.ggplot2::ro_gg_theme()</code> and is designed to slot into any echarts4r
 pipeline.</p>
-<p>The theme is generated at call time from <code><a href="https://rdrr.io/pkg/ROvis.utils/man/ro_color.html" class="external-link">ROvis.utils::ro_color()</a></code> and <code><a href="https://rdrr.io/pkg/ROvis.utils/man/ro_color_palette.html" class="external-link">ROvis.utils::ro_color_palette()</a></code>.
+<p>The theme is generated at call time from <code><a href="https://rivm-syso.github.io/ROvis.utils/reference/ro_color.html" class="external-link">ROvis.utils::ro_color()</a></code> and <code><a href="https://rivm-syso.github.io/ROvis.utils/reference/ro_color_palette.html" class="external-link">ROvis.utils::ro_color_palette()</a></code>.
 A custom accessible HTML legend is always included. The native ECharts
-legend is replaced automatically to meet the RO accessibility spec.</p>
+legend is replaced automatically to meet the RO accessibility spec: legend
+items can be reached with Tab and toggled with Enter or Space.</p>
+<p><code>ro_e_theme()</code> is styling only. It does not add the other accessibility
+features, such as arrow-key navigation of data points. Use <code><a href="ro_e_standard.html">ro_e_standard()</a></code>
+for that (recommended).</p>
     </div>
 
     <div class="section level2">
@@ -80,7 +92,7 @@ legend is replaced automatically to meet the RO accessibility spec.</p>
 <dt id="arg-palette">palette<a class="anchor" aria-label="anchor" href="#arg-palette"></a></dt>
 <dd><p>Character. Palette to use for series colors. One of
 <code>"categorical"</code> (default), <code>"gender_con"</code>, or <code>"gender_unc"</code>. Passed to
-<code><a href="https://rdrr.io/pkg/ROvis.utils/man/ro_color_palette.html" class="external-link">ro_color_palette()</a></code>.</p></dd>
+<code><a href="https://rivm-syso.github.io/ROvis.utils/reference/ro_color_palette.html" class="external-link">ro_color_palette()</a></code>.</p></dd>
 
 
 <dt id="arg-fixed-aspect">fixed_aspect<a class="anchor" aria-label="anchor" href="#arg-fixed-aspect"></a></dt>
@@ -114,7 +126,7 @@ Defaults to <code>"svg"</code> to comply with accessibility standards.</p></dd>
     <h2 id="ro-style-applied">RO style applied<a class="anchor" aria-label="anchor" href="#ro-style-applied"></a></h2>
 
 
-<ul><li><p>Series colors from <code><a href="https://rdrr.io/pkg/ROvis.utils/man/ro_color_palette.html" class="external-link">ro_color_palette()</a></code> (default: <code>"categorical"</code>).</p></li>
+<ul><li><p>Series colors from <code><a href="https://rivm-syso.github.io/ROvis.utils/reference/ro_color_palette.html" class="external-link">ro_color_palette()</a></code> (default: <code>"categorical"</code>).</p></li>
 <li><p>Title in <code>ro_color("lintblauw")</code>, subtitle in <code>ro_color("donkerblauw")</code>.</p></li>
 <li><p>Axis labels and ticks in <code>ro_color("grijs_7")</code>.</p></li>
 <li><p>Horizontal grid lines (value axis); no vertical grid lines.</p></li>
@@ -125,17 +137,21 @@ Defaults to <code>"svg"</code> to comply with accessibility standards.</p></dd>
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
     <div class="dont-index">
 <ul><li><p><code>ROvis.ggplot2::ro_gg_theme()</code> for the ggplot2 equivalent.</p></li>
-<li><p><code><a href="ro_e_keyboard_nav.html">ro_e_keyboard_nav()</a></code> to add keyboard accessibility on top of the theme.</p></li>
-<li><p><code><a href="https://rdrr.io/pkg/ROvis.utils/man/ro_color_palette.html" class="external-link">ROvis.utils::ro_color_palette()</a></code> to inspect the available palettes.</p></li>
-<li><p><code><a href="https://rdrr.io/pkg/ROvis.utils/man/ro_color.html" class="external-link">ROvis.utils::ro_color()</a></code> to look up individual RO color hex codes.</p></li>
+<li><p><code><a href="ro_e_standard.html">ro_e_standard()</a></code> for the theme plus all accessibility features.</p></li>
+<li><p><code><a href="https://rivm-syso.github.io/ROvis.utils/reference/ro_color_palette.html" class="external-link">ROvis.utils::ro_color_palette()</a></code> to inspect the available palettes.</p></li>
+<li><p><code><a href="https://rivm-syso.github.io/ROvis.utils/reference/ro_color.html" class="external-link">ROvis.utils::ro_color()</a></code> to look up individual RO color hex codes.</p></li>
 </ul><p>Other echarts4r:
+<code><a href="ro_e_announce_title_first.html">ro_e_announce_title_first()</a></code>,
 <code><a href="ro_e_build_keyboard_nav_js.html">ro_e_build_keyboard_nav_js()</a></code>,
 <code><a href="ro_e_build_onrender_js.html">ro_e_build_onrender_js()</a></code>,
 <code><a href="ro_e_detect_axis_orientation.html">ro_e_detect_axis_orientation()</a></code>,
 <code><a href="ro_e_keyboard_nav.html">ro_e_keyboard_nav()</a></code>,
 <code><a href="ro_e_keyboard_nav_axis_js.html">ro_e_keyboard_nav_axis_js()</a></code>,
-<code><a href="ro_e_keyboard_nav_legend_js.html">ro_e_keyboard_nav_legend_js()</a></code>,
-<code><a href="ro_e_theme_list.html">ro_e_theme_list()</a></code></p></div>
+<code><a href="ro_e_legend_a11y_js.html">ro_e_legend_a11y_js()</a></code>,
+<code><a href="ro_e_sort_axis_labels.html">ro_e_sort_axis_labels()</a></code>,
+<code><a href="ro_e_standard.html">ro_e_standard()</a></code>,
+<code><a href="ro_e_theme_list.html">ro_e_theme_list()</a></code>,
+<code><a href="ro_e_tooltip_announce_js.html">ro_e_tooltip_announce_js()</a></code></p></div>
     </div>
 
     <div class="section level2">
@@ -156,7 +172,7 @@ Defaults to <code>"svg"</code> to comply with accessibility standards.</p></dd>
 
 
     <footer><div class="pkgdown-footer-left">
-  <p>Developed by ROvisteam.</p>
+  <p>Developed by ROvis team.</p>
 </div>
 
 <div class="pkgdown-footer-right">

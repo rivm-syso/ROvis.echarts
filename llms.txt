@@ -4,48 +4,64 @@
 
 ## Description
 
-ROvis.echarts is an R package that provides a comprehensive suite of
-functions for making echart plots in rijksoverheid style.
+A tool to uniformly visualise graphs in ‘echarts4r’ using standardized
+Rijksoverheid (Dutch National Government) styling. This package is part
+of the \[ROvis umbrella package\]
+(<https://github.com/rivm-syso/ROvis>).
 
 ## Installation
 
+Install the latest release from
+[R-universe](https://rivm-syso.r-universe.dev):
+
 ``` r
 
-# Install from GitLab
-# install.packages("devtools")
-devtools::install_gitlab("spin/ROvis.echarts/ROvis.echarts", host = "gitlab.rivm.nl")
+install.packages(
+  "ROvis.echarts",
+  repos = c("https://rivm-syso.r-universe.dev", "https://cloud.r-project.org")
+)
 ```
 
-For more information, check out the [wiki page about
-daratools](https://gitlab.rivm.nl/dara/wiki/-/wikis/DARAtools).
+Install the development version from GitHub:
+
+``` r
+
+# install.packages("pak")
+pak::pak("rivm-syso/ROvis.echarts")
+```
+
+A version number ending in `.9000` is a development version.
 
 ## Usage
 
-*Use examples liberally, and show the expected output if you can. It’s
-helpful to have the smallest example of usage that you can demonstrate
-inline, while providing links to more sophisticated examples if they are
-too long to reasonably include in the README.*
+``` r
+
+library(ROvis.echarts)
+
+mtcars |>
+  e_charts(wt) |>
+  e_scatter(mpg) |>
+  ro_e_theme()
+```
 
 ## Support
 
 First point of contact for questions: ROvisteam (<spin@rivm.nl>)
 
-## Roadmap
-
-*If you have ideas for releases in the future, it is a good idea to list
-them in the README.*
-
 ## Contributing
 
-*State if you are open to contributions and what your requirements are
-for accepting them.*
+We welcome contributions! Before you start, **please read
+[CONTRIBUTING.md](https://rivm-syso.github.io/ROvis.echarts/CONTRIBUTING.md)**.
+It explains how to open an issue, our git etiquette (branches, commits,
+pull requests and reviews) and our code standards. See
+[CONTRIBUTORS.md](https://rivm-syso.github.io/ROvis.echarts/CONTRIBUTORS.md)
+for the list of contributors.
 
 ## Instructions for developers
 
-Check out the [wiki page about r
-packages](https://gitlab.rivm.nl/dara/wiki/-/wikis/DARAtools) for
-elaborate information about R package development. Below we describe the
-most important guidelines and practicalities.
+For information about R package development, check the [R Packages
+book](https://r-pkgs.org/). Below we describe the most important
+guidelines and practicalities.
 
 ### Requirements
 
@@ -85,29 +101,31 @@ new function dependency to the NAMESPACE with
 Add documentation to new functions by inserting a roxygen skeleton and
 use
 [`devtools::document()`](https://devtools.r-lib.org/reference/document.html)
-to create automatic documentation in the `man` folder, for more
-information check out this [wiki
-section](https://gitlab.rivm.nl/dara/wiki/-/wikis/Create%20your%20own%20R%20packages#documentation)
+to create automatic documentation in the `man` folder
 
 ## Authors and acknowledgment
 
-This R packages was created by ROvisteam (<spin@rivm.nl>).
+This R package was created by ROvis team (<spin@rivm.nl>).
 
 ## License
 
-*For open source projects, indicate how it is licensed.*
+The code can be re-used under license [EUPL
+v.1.2](https://eupl.eu/1.2/en/). See
+[LICENCE](https://rivm-syso.github.io/ROvis.echarts/LICENCE) for
+details.
 
 # Package index
 
 ## All functions
 
-- [`ro_e_keyboard_nav()`](ro_e_keyboard_nav.md) : Add keyboard
-  navigation to an echarts4r chart
-- [`ro_e_theme()`](ro_e_theme.md) : Apply the RO echarts theme to an
-  echarts4r object
+- [`ro_e_standard()`](https://rivm-syso.github.io/ROvis.echarts/reference/ro_e_standard.md)
+  : Apply the RO style and accessibility features to an echarts4r chart
+- [`ro_e_theme()`](https://rivm-syso.github.io/ROvis.echarts/reference/ro_e_theme.md)
+  : Apply the RO echarts theme to an echarts4r object
 
 # Articles
 
 ### All vignettes
 
-- [ECharts in RO style](echarts-in-ro-style.md):
+- [ECharts in RO
+  style](https://rivm-syso.github.io/ROvis.echarts/articles/echarts-in-ro-style.md):

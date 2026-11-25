@@ -2,16 +2,21 @@
 
 ## Authors
 
-- **ROvisteam**. Maintainer, author.
+- **ROvis team**. Maintainer, author.
 
 ## Citation
 
-ROvisteam (2026). *ROvis.echarts: Rijksoverheid Visualisatie - echarts*.
-R package version 0.1.0.9000.
+Source:
+[`DESCRIPTION`](https://github.com/rivm-syso/ROvis.echarts/blob/v0.1.0/DESCRIPTION)
+
+ROvis team (2026). *ROvis.echarts: Accessible Echarts With Rijksoverheid
+Styling*. R package version 0.1.0,
+<https://rivm-syso.github.io/ROvis.echarts/>.
 
     @Manual{,
-      title = {ROvis.echarts: Rijksoverheid Visualisatie - echarts},
-      author = {{ROvisteam}},
+      title = {ROvis.echarts: Accessible Echarts With Rijksoverheid Styling},
+      author = {{ROvis team}},
       year = {2026},
-      note = {R package version 0.1.0.9000},
+      note = {R package version 0.1.0},
+      url = {https://rivm-syso.github.io/ROvis.echarts/},
     }

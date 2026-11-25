@@ -14,7 +14,8 @@ ro_e_build_onrender_js(
   series_names,
   font_family,
   name_color,
-  fixed_aspect = TRUE
+  fixed_aspect = TRUE,
+  legend_a11y = TRUE
 )
 ```
 
@@ -37,6 +38,11 @@ ro_e_build_onrender_js(
   Logical. When TRUE the chart enforces a 2:1 width:height aspect ratio
   and stays responsive on resize.
 
+- legend_a11y:
+
+  Logical. When TRUE (default) the HTML legend gets keyboard and screen
+  reader support from ro_e_legend_a11y_js().
+
 ## Value
 
 A JavaScript string for htmlwidgets::onRender().
@@ -50,10 +56,14 @@ explicitly.
 ## See also
 
 Other echarts4r:
-[`ro_e_build_keyboard_nav_js()`](ro_e_build_keyboard_nav_js.md),
-[`ro_e_detect_axis_orientation()`](ro_e_detect_axis_orientation.md),
-[`ro_e_keyboard_nav()`](ro_e_keyboard_nav.md),
-[`ro_e_keyboard_nav_axis_js()`](ro_e_keyboard_nav_axis_js.md),
-[`ro_e_keyboard_nav_legend_js()`](ro_e_keyboard_nav_legend_js.md),
-[`ro_e_theme()`](ro_e_theme.md),
-[`ro_e_theme_list()`](ro_e_theme_list.md)
+[`ro_e_announce_title_first()`](https://rivm-syso.github.io/ROvis.echarts/reference/ro_e_announce_title_first.md),
+[`ro_e_build_keyboard_nav_js()`](https://rivm-syso.github.io/ROvis.echarts/reference/ro_e_build_keyboard_nav_js.md),
+[`ro_e_detect_axis_orientation()`](https://rivm-syso.github.io/ROvis.echarts/reference/ro_e_detect_axis_orientation.md),
+[`ro_e_keyboard_nav()`](https://rivm-syso.github.io/ROvis.echarts/reference/ro_e_keyboard_nav.md),
+[`ro_e_keyboard_nav_axis_js()`](https://rivm-syso.github.io/ROvis.echarts/reference/ro_e_keyboard_nav_axis_js.md),
+[`ro_e_legend_a11y_js()`](https://rivm-syso.github.io/ROvis.echarts/reference/ro_e_legend_a11y_js.md),
+[`ro_e_sort_axis_labels()`](https://rivm-syso.github.io/ROvis.echarts/reference/ro_e_sort_axis_labels.md),
+[`ro_e_standard()`](https://rivm-syso.github.io/ROvis.echarts/reference/ro_e_standard.md),
+[`ro_e_theme()`](https://rivm-syso.github.io/ROvis.echarts/reference/ro_e_theme.md),
+[`ro_e_theme_list()`](https://rivm-syso.github.io/ROvis.echarts/reference/ro_e_theme_list.md),
+[`ro_e_tooltip_announce_js()`](https://rivm-syso.github.io/ROvis.echarts/reference/ro_e_tooltip_announce_js.md)

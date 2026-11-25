@@ -6,11 +6,17 @@ equivalent of `ROvis.ggplot2::ro_gg_theme()` and is designed to slot
 into any echarts4r pipeline.
 
 The theme is generated at call time from
-[`ROvis.utils::ro_color()`](https://rdrr.io/pkg/ROvis.utils/man/ro_color.html)
+[`ROvis.utils::ro_color()`](https://rivm-syso.github.io/ROvis.utils/reference/ro_color.html)
 and
-[`ROvis.utils::ro_color_palette()`](https://rdrr.io/pkg/ROvis.utils/man/ro_color_palette.html).
+[`ROvis.utils::ro_color_palette()`](https://rivm-syso.github.io/ROvis.utils/reference/ro_color_palette.html).
 A custom accessible HTML legend is always included. The native ECharts
-legend is replaced automatically to meet the RO accessibility spec.
+legend is replaced automatically to meet the RO accessibility spec:
+legend items can be reached with Tab and toggled with Enter or Space.
+
+`ro_e_theme()` is styling only. It does not add the other accessibility
+features, such as arrow-key navigation of data points. Use
+[`ro_e_standard()`](https://rivm-syso.github.io/ROvis.echarts/reference/ro_e_standard.md)
+for that (recommended).
 
 ## Usage
 
@@ -35,7 +41,7 @@ ro_e_theme(
 
   Character. Palette to use for series colors. One of `"categorical"`
   (default), `"gender_con"`, or `"gender_unc"`. Passed to
-  [`ro_color_palette()`](https://rdrr.io/pkg/ROvis.utils/man/ro_color_palette.html).
+  [`ro_color_palette()`](https://rivm-syso.github.io/ROvis.utils/reference/ro_color_palette.html).
 
 - fixed_aspect:
 
@@ -67,7 +73,7 @@ The modified echarts4r object.
 ## RO style applied
 
 - Series colors from
-  [`ro_color_palette()`](https://rdrr.io/pkg/ROvis.utils/man/ro_color_palette.html)
+  [`ro_color_palette()`](https://rivm-syso.github.io/ROvis.utils/reference/ro_color_palette.html)
   (default: `"categorical"`).
 
 - Title in `ro_color("lintblauw")`, subtitle in
@@ -85,23 +91,27 @@ The modified echarts4r object.
 
 - `ROvis.ggplot2::ro_gg_theme()` for the ggplot2 equivalent.
 
-- [`ro_e_keyboard_nav()`](ro_e_keyboard_nav.md) to add keyboard
-  accessibility on top of the theme.
+- [`ro_e_standard()`](https://rivm-syso.github.io/ROvis.echarts/reference/ro_e_standard.md)
+  for the theme plus all accessibility features.
 
-- [`ROvis.utils::ro_color_palette()`](https://rdrr.io/pkg/ROvis.utils/man/ro_color_palette.html)
+- [`ROvis.utils::ro_color_palette()`](https://rivm-syso.github.io/ROvis.utils/reference/ro_color_palette.html)
   to inspect the available palettes.
 
-- [`ROvis.utils::ro_color()`](https://rdrr.io/pkg/ROvis.utils/man/ro_color.html)
+- [`ROvis.utils::ro_color()`](https://rivm-syso.github.io/ROvis.utils/reference/ro_color.html)
   to look up individual RO color hex codes.
 
 Other echarts4r:
-[`ro_e_build_keyboard_nav_js()`](ro_e_build_keyboard_nav_js.md),
-[`ro_e_build_onrender_js()`](ro_e_build_onrender_js.md),
-[`ro_e_detect_axis_orientation()`](ro_e_detect_axis_orientation.md),
-[`ro_e_keyboard_nav()`](ro_e_keyboard_nav.md),
-[`ro_e_keyboard_nav_axis_js()`](ro_e_keyboard_nav_axis_js.md),
-[`ro_e_keyboard_nav_legend_js()`](ro_e_keyboard_nav_legend_js.md),
-[`ro_e_theme_list()`](ro_e_theme_list.md)
+[`ro_e_announce_title_first()`](https://rivm-syso.github.io/ROvis.echarts/reference/ro_e_announce_title_first.md),
+[`ro_e_build_keyboard_nav_js()`](https://rivm-syso.github.io/ROvis.echarts/reference/ro_e_build_keyboard_nav_js.md),
+[`ro_e_build_onrender_js()`](https://rivm-syso.github.io/ROvis.echarts/reference/ro_e_build_onrender_js.md),
+[`ro_e_detect_axis_orientation()`](https://rivm-syso.github.io/ROvis.echarts/reference/ro_e_detect_axis_orientation.md),
+[`ro_e_keyboard_nav()`](https://rivm-syso.github.io/ROvis.echarts/reference/ro_e_keyboard_nav.md),
+[`ro_e_keyboard_nav_axis_js()`](https://rivm-syso.github.io/ROvis.echarts/reference/ro_e_keyboard_nav_axis_js.md),
+[`ro_e_legend_a11y_js()`](https://rivm-syso.github.io/ROvis.echarts/reference/ro_e_legend_a11y_js.md),
+[`ro_e_sort_axis_labels()`](https://rivm-syso.github.io/ROvis.echarts/reference/ro_e_sort_axis_labels.md),
+[`ro_e_standard()`](https://rivm-syso.github.io/ROvis.echarts/reference/ro_e_standard.md),
+[`ro_e_theme_list()`](https://rivm-syso.github.io/ROvis.echarts/reference/ro_e_theme_list.md),
+[`ro_e_tooltip_announce_js()`](https://rivm-syso.github.io/ROvis.echarts/reference/ro_e_tooltip_announce_js.md)
 
 ## Examples
 

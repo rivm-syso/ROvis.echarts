@@ -1,11 +1,24 @@
 # ECharts in RO style
 
 This vignette covers the `echarts4r` functions in `ROvis`:
-[`ro_e_theme()`](../reference/ro_e_theme.md) and
-[`ro_e_keyboard_nav()`](../reference/ro_e_keyboard_nav.md). Together
-they let you build interactive charts that follow the Rijksoverheid (RO)
-visual style. If you are new to `echarts4r`, we recommend checking out
-the [echarts4r documentation](https://echarts4r.john-coene.com/) first.
+[`ro_e_standard()`](https://rivm-syso.github.io/ROvis.echarts/reference/ro_e_standard.md)
+and
+[`ro_e_theme()`](https://rivm-syso.github.io/ROvis.echarts/reference/ro_e_theme.md).
+They let you build interactive charts that follow the Rijksoverheid (RO)
+visual style.
+[`ro_e_standard()`](https://rivm-syso.github.io/ROvis.echarts/reference/ro_e_standard.md)
+is the recommended one: it applies the theme and adds all accessibility
+features.
+[`ro_e_theme()`](https://rivm-syso.github.io/ROvis.echarts/reference/ro_e_theme.md)
+is the styling only. If you are new to `echarts4r`, we recommend
+checking out the [echarts4r
+documentation](https://echarts4r.john-coene.com/) first.
+
+> **Important**
+>
+> In this vignette, the examples specifically follow the style
+> guidelines of the National Institue for Public Health and the
+> Envrionment (RIVM).
 
 ## Setup
 
@@ -95,12 +108,14 @@ dat_weekly <- data.frame(
 )
 ```
 
-## Apply the RO theme
+## Apply the RO style
 
-[`ro_e_theme()`](../reference/ro_e_theme.md) applies the RO visual style
-to any `echarts4r` chart. It slots into an `echarts4r` pipeline the same
-way `ro_gg_theme()` does in `ggplot2.` Add it at the end, after all your
-chart layers:
+[`ro_e_standard()`](https://rivm-syso.github.io/ROvis.echarts/reference/ro_e_standard.md)
+applies the RO visual style to any `echarts4r` chart and adds all
+accessibility features (see [Accessibility
+features](#accessibility-features)). It slots into an `echarts4r`
+pipeline the same way `ro_gg_theme()` does in `ggplot2`. Add it at the
+end, after all your chart layers:
 
 ``` r
 
@@ -112,7 +127,7 @@ dat_cases |>
   e_x_axis(name = "Age class") |>
   e_y_axis(name = "Value") |>
   e_tooltip(trigger = "axis") |>
-  ro_e_theme()
+  ro_e_standard()
 ```
 
 ## Chart types
@@ -134,7 +149,7 @@ dat_cases |>
   e_x_axis(name = "Age class") |>
   e_y_axis(name = "Value") |>
   e_tooltip(trigger = "axis") |>
-  ro_e_theme(palette = "gender_con")
+  ro_e_standard(palette = "gender_con")
 ```
 
 ### Horizontal bar chart
@@ -154,7 +169,7 @@ dat_cases |>
   e_x_axis(name = "Value") |>
   e_y_axis(name = "Age class") |>
   e_tooltip(trigger = "axis") |>
-  ro_e_theme()
+  ro_e_standard()
 ```
 
 ### Line chart
@@ -169,7 +184,7 @@ dat_weekly |>
   e_x_axis(name = "Week") |>
   e_y_axis(name = "Value") |>
   e_tooltip(trigger = "axis") |>
-  ro_e_theme(palette = "gender_con")
+  ro_e_standard(palette = "gender_con")
 ```
 
 A note on x-axis variable types: if your x-axis variable is numeric
@@ -201,12 +216,12 @@ data_multi |>
   e_charts(year) |>
   e_bar(women, name = "Women") |>
   e_bar(men, name = "Men") |>
-  ro_e_theme(palette = "gender_con")
+  ro_e_standard(palette = "gender_con")
 ```
 
-    ## Warning: ! The x-axis variable is numeric, which creates a continuous axis.
-    ## ℹ If not intended, convert the variable to a factor: `mutate(year =
-    ##   factor(year))`
+    Warning: ! The x-axis variable is numeric, which creates a continuous axis.
+    ℹ If not intended, convert the variable to a factor: `mutate(year =
+      factor(year))`
 
 ### Grouped trendline
 
@@ -238,19 +253,20 @@ tab_cases_week_by_prov |>
   e_title("Cases per week for 5 Dutch provinces") |>
   e_legend() |>
   e_tooltip(trigger = "item") |>
-  ro_e_theme()
+  ro_e_standard()
 ```
 
 ## Aspect ratio
 
-By default, [`ro_e_theme()`](../reference/ro_e_theme.md) enforces fixed
-aspect ratios in accordance with the RO data visualisation guidelines:
-the **total element** (title + chart + legend) is **2:1
-width-to-height**, and the inner **plot area** (grid only, without axis
-labels or legend) is **3:1 width-to-height**. Both ratios update
-automatically whenever the container width changes, for example when the
-browser window is resized or a Shiny sidebar is toggled. This is
-controlled by the `fixed_aspect` argument, which defaults to `TRUE`.
+By default,
+[`ro_e_standard()`](https://rivm-syso.github.io/ROvis.echarts/reference/ro_e_standard.md)
+enforces fixed aspect ratios in accordance with the RO data
+visualisation guidelines: the **total element** (title + chart + legend)
+is **2:1 width-to-height**, and the inner **plot area** (grid only,
+without axis labels or legend) is **3:1 width-to-height**. Both ratios
+update automatically whenever the container width changes, for example
+when the browser window is resized or a Shiny sidebar is toggled. This
+is controlled by the `fixed_aspect` argument, which defaults to `TRUE`.
 
 ``` r
 
@@ -262,7 +278,7 @@ dat_cases |>
   e_x_axis(name = "Age class") |>
   e_y_axis(name = "Value") |>
   e_tooltip(trigger = "axis") |>
-  ro_e_theme()
+  ro_e_standard()
 ```
 
 Set `fixed_aspect = FALSE` when you need to control the chart height
@@ -281,14 +297,15 @@ dat_cases |>
   e_x_axis(name = "Age class") |>
   e_y_axis(name = "Value") |>
   e_tooltip(trigger = "axis") |>
-  ro_e_theme(fixed_aspect = FALSE)
+  ro_e_standard(fixed_aspect = FALSE)
 ```
 
 ## Color palettes
 
-[`ro_e_theme()`](../reference/ro_e_theme.md) accepts a `palette`
-argument. The available palettes are the same ones used by
-[`ro_color_palette()`](https://rdrr.io/pkg/ROvis.utils/man/ro_color_palette.html):
+[`ro_e_standard()`](https://rivm-syso.github.io/ROvis.echarts/reference/ro_e_standard.md)
+accepts a `palette` argument. The available palettes are the same ones
+used by
+[`ro_color_palette()`](https://rivm-syso.github.io/ROvis.utils/reference/ro_color_palette.html):
 
 - `"categorical"` (default) for general categorical data
 - `"gender_con"` for conventional gender colors
@@ -297,7 +314,7 @@ argument. The available palettes are the same ones used by
 - `"greys"` for grey tints only
 
 You can preview any palette with
-[`ro_show_colors()`](https://rdrr.io/pkg/ROvis.utils/man/ro_show_colors.html):
+[`ro_show_colors()`](https://rivm-syso.github.io/ROvis.utils/reference/ro_show_colors.html):
 
 ``` r
 
@@ -320,7 +337,7 @@ ro_show_colors("greys")
 ```
 
 Apply a different palette by passing its name to
-[`ro_e_theme()`](../reference/ro_e_theme.md):
+[`ro_e_standard()`](https://rivm-syso.github.io/ROvis.echarts/reference/ro_e_standard.md):
 
 ``` r
 
@@ -332,24 +349,37 @@ dat_cases |>
   e_x_axis(name = "Age class") |>
   e_y_axis(name = "Value") |>
   e_tooltip(trigger = "axis") |>
-  ro_e_theme(palette = "gender_unc")
+  ro_e_standard(palette = "gender_unc")
 ```
 
-## Keyboard navigation
+## Accessibility features
 
 Interactive charts need to be accessible to keyboard-only users.
-[`ro_e_keyboard_nav()`](../reference/ro_e_keyboard_nav.md) adds keyboard
-controls on top of [`ro_e_theme()`](../reference/ro_e_theme.md):
+[`ro_e_standard()`](https://rivm-syso.github.io/ROvis.echarts/reference/ro_e_standard.md)
+applies
+[`ro_e_theme()`](https://rivm-syso.github.io/ROvis.echarts/reference/ro_e_theme.md)
+and adds keyboard and screen reader support on top:
 
 - **Arrow keys** move the tooltip across data points. The direction is
   auto-detected from the chart orientation (left/right for column and
   line charts, up/down for horizontal bar charts). You can also set it
-  explicitly with `axis`.
-- **Letter keys** toggle individual series on and off. Use the
-  `series_keys` argument to map a single letter to each series name.
+  explicitly with `axis`. The chart needs focus first: Tab to it or
+  click it. Screen readers read out the tooltip content at every step.
+- **Tab** focuses legend items; **Enter** or **Space** toggles them.
+  Screen readers announce each legend item as a button with its on/off
+  state. The legend is part of
+  [`ro_e_theme()`](https://rivm-syso.github.io/ROvis.echarts/reference/ro_e_theme.md),
+  so this also works with the theme alone.
+- **Screen readers** announce the chart title first, before the axes and
+  data, and read the axis labels in axis order (left to right, bottom to
+  top). This needs `renderer = "svg"`, the default.
 
-Add [`ro_e_keyboard_nav()`](../reference/ro_e_keyboard_nav.md) as the
-last step in the pipeline:
+Try it on the line chart: Tab to the chart and use the arrow keys, or
+Tab further to the legend.
+[`ro_e_standard()`](https://rivm-syso.github.io/ROvis.echarts/reference/ro_e_standard.md)
+takes the same styling arguments as
+[`ro_e_theme()`](https://rivm-syso.github.io/ROvis.echarts/reference/ro_e_theme.md),
+plus `axis`:
 
 ``` r
 
@@ -359,17 +389,15 @@ dat_weekly |>
   e_line(n) |>
   e_title(
     "Weekly cases by sex",
-    "Use arrow keys to navigate, W/M to toggle series"
+    "Use arrow keys to navigate, Tab + Enter/Space to toggle series"
   ) |>
   e_x_axis(name = "Week") |>
   e_y_axis(name = "Value") |>
   e_tooltip(trigger = "axis") |>
-  ro_e_theme(palette = "gender_con") |>
-  ro_e_keyboard_nav(series_keys = c(w = "Women", m = "Men", t = "Total"))
+  ro_e_standard(palette = "gender_con")
 ```
 
-Where you assign “w” to “Women”, “m” to “Men”, and “t” to “Total”. You
-can also extent this further. For example, in the case of Dutch
+You can also extend this further. For example, in the case of Dutch
 provinces:
 
 ``` r
@@ -392,25 +420,13 @@ tab_cases_week_by_prov |>
   e_title("COVID-19 cases per week for 5 Dutch provinces") |>
   e_legend() |>
   e_tooltip(trigger = "item") |>
-  ro_e_theme() |>
-  ro_e_keyboard_nav(
-    series_keys = c(
-      f = "Flevoland",
-      g = "Groningen",
-      n = "Noord-Brabant",
-      u = "Utrecht",
-      z = "Zeeland"
-    ),
-    axis = "both"
-  )
+  ro_e_standard(axis = "both")
 ```
 
-Note that names must be single letters and values must exactly match the
-series names in the chart.
-
 For a horizontal bar chart,
-[`ro_e_keyboard_nav()`](../reference/ro_e_keyboard_nav.md) auto-detects
-the vertical orientation and binds the up/down arrow keys instead:
+[`ro_e_standard()`](https://rivm-syso.github.io/ROvis.echarts/reference/ro_e_standard.md)
+auto-detects the vertical orientation and binds the up/down arrow keys
+instead:
 
 ``` r
 
@@ -423,6 +439,29 @@ dat_cases |>
   e_y_axis(name = "Age class") |>
   e_x_axis(name = "Value") |>
   e_tooltip(trigger = "axis") |>
-  ro_e_theme() |>
-  ro_e_keyboard_nav()
+  ro_e_standard()
+```
+
+## Styling only
+
+For a chart that
+[`ro_e_standard()`](https://rivm-syso.github.io/ROvis.echarts/reference/ro_e_standard.md)
+doesn’t cover, apply only the RO styling with
+[`ro_e_theme()`](https://rivm-syso.github.io/ROvis.echarts/reference/ro_e_theme.md).
+It takes the same styling arguments, but it adds **no** accessibility
+features apart from the keyboard-accessible legend, so prefer
+[`ro_e_standard()`](https://rivm-syso.github.io/ROvis.echarts/reference/ro_e_standard.md)
+whenever you can.
+
+``` r
+
+dat_cases |>
+  filter(sex == "Women") |>
+  e_charts(agegroup) |>
+  e_bar(n, name = "Women") |>
+  e_title("Cases by age group", "Styling only") |>
+  e_x_axis(name = "Age class") |>
+  e_y_axis(name = "Value") |>
+  e_tooltip(trigger = "axis") |>
+  ro_e_theme()
 ```

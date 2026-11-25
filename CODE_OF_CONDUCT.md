@@ -78,8 +78,8 @@ conduct violation, and this Code of Conduct reinforces encouraged
 behaviors and norms that can help avoid conflicts and minimize harm.
 
 When an incident does occur, it is important to report it promptly. To
-report a possible violation, **please reach out to the DARA team at RIVM
-via <dara-team-list@rivm.nl>.**
+report a possible violation, **please reach out to the SPIN team at RIVM
+via <spin@rivm.nl>.**
 
 Community Moderators take reports of violations seriously and will make
 every effort to respond in a timely manner. They will investigate all
