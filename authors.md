@@ -7,7 +7,7 @@
 ## Citation
 
 Source:
-[`DESCRIPTION`](https://github.com/rivm-syso/ROvis.echarts/blob/v0.1.0/DESCRIPTION)
+[`DESCRIPTION`](https://github.com/rivm-syso/ROvis.echarts/blob/main/DESCRIPTION)
 
 ROvis team (2026). *ROvis.echarts: Accessible Echarts With Rijksoverheid
 Styling*. R package version 0.1.0,
