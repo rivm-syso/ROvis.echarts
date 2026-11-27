@@ -1,5 +1,10 @@
 # ROvis.echarts (development version)
 
+### :bug: Fixed
+
+- `ro_e_theme()` no longer draws its HTML legend when the legend is turned off with
+  `e_legend(show = FALSE)` (#60).
+
 # ROvis.echarts 0.1.0
 
 First release since `ROvis.echarts` was split out of the `ROvis` monolith into its own

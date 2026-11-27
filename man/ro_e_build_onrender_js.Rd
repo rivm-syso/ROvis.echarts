@@ -10,6 +10,7 @@ ro_e_build_onrender_js(
   font_family,
   name_color,
   fixed_aspect = TRUE,
+  show_legend = TRUE,
   legend_a11y = TRUE
 )
 }
@@ -22,6 +23,10 @@ ro_e_build_onrender_js(
 
 \item{fixed_aspect}{Logical. When TRUE the chart enforces a 2:1 width:height
 aspect ratio and stays responsive on resize.}
+
+\item{show_legend}{Logical. When TRUE (default) the HTML legend is drawn for
+charts with more than one series. FALSE when the user turned the legend off
+with \code{e_legend(show = FALSE)}.}
 
 \item{legend_a11y}{Logical. When TRUE (default) the HTML legend gets keyboard
 and screen reader support from ro_e_legend_a11y_js().}

@@ -10,9 +10,10 @@
 #' pipeline.
 #'
 #' The theme is generated at call time from [ROvis.utils::ro_color()] and [ROvis.utils::ro_color_palette()].
-#' A custom accessible HTML legend is always included. The native ECharts
-#' legend is replaced automatically to meet the RO accessibility spec: legend
-#' items can be reached with Tab and toggled with Enter or Space.
+#' A custom accessible HTML legend is included for charts with more than one
+#' series. The native ECharts legend is replaced automatically to meet the RO
+#' accessibility spec: legend items can be reached with Tab and toggled with
+#' Enter or Space. Turn the legend off with `e_legend(show = FALSE)`.
 #'
 #' `ro_e_theme()` is styling only. It does not add the other accessibility
 #' features, such as arrow-key navigation of data points. Use [ro_e_standard()]
@@ -125,7 +126,8 @@ ro_e_theme <- function(
       series_names,
       font_family,
       ro_color("lintblauw"),
-      fixed_aspect
+      fixed_aspect,
+      show_legend = !isFALSE(e$x$opts$legend$show)
     )
   )
 }
