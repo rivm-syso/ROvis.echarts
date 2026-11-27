@@ -10,6 +10,15 @@
 
 Provides accessible, Echart plots and themed visualizations with Rijksoverheid styling.
 }
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://rivm-syso.github.io/ROvis.echarts/}
+  \item \url{https://github.com/rivm-syso/ROvis.echarts}
+  \item Report bugs at \url{https://github.com/rivm-syso/ROvis.echarts/issues}
+}
+
+}
 \author{
 \strong{Maintainer}: ROvis team \email{spin@rivm.nl}
 

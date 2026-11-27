@@ -46,9 +46,10 @@ equivalent of \code{\link[ROvis.ggplot2:ro_gg_theme]{ROvis.ggplot2::ro_gg_theme(
 pipeline.
 
 The theme is generated at call time from \code{\link[ROvis.utils:ro_color]{ROvis.utils::ro_color()}} and \code{\link[ROvis.utils:ro_color_palette]{ROvis.utils::ro_color_palette()}}.
-A custom accessible HTML legend is always included. The native ECharts
-legend is replaced automatically to meet the RO accessibility spec: legend
-items can be reached with Tab and toggled with Enter or Space.
+A custom accessible HTML legend is included for charts with more than one
+series. The native ECharts legend is replaced automatically to meet the RO
+accessibility spec: legend items can be reached with Tab and toggled with
+Enter or Space. Turn the legend off with \code{e_legend(show = FALSE)}.
 
 \code{ro_e_theme()} is styling only. It does not add the other accessibility
 features, such as arrow-key navigation of data points. Use \code{\link[=ro_e_standard]{ro_e_standard()}}

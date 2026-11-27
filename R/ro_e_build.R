@@ -68,6 +68,9 @@ ro_e_build_keyboard_nav_js <- function(axis_js, announce = TRUE) {
 #' @param font_family Font family string resolved by ro_e_theme().
 #' @param fixed_aspect Logical. When TRUE the chart enforces a 2:1 width:height
 #'   aspect ratio and stays responsive on resize.
+#' @param show_legend Logical. When TRUE (default) the HTML legend is drawn for
+#'   charts with more than one series. FALSE when the user turned the legend off
+#'   with `e_legend(show = FALSE)`.
 #' @param legend_a11y Logical. When TRUE (default) the HTML legend gets keyboard
 #'   and screen reader support from ro_e_legend_a11y_js().
 #' @family echarts4r
@@ -78,6 +81,7 @@ ro_e_build_onrender_js <- function(
   font_family,
   name_color,
   fixed_aspect = TRUE,
+  show_legend = TRUE,
   legend_a11y = TRUE
 ) {
   colors_json <- jsonlite::toJSON(colors, auto_unbox = FALSE)
@@ -85,6 +89,7 @@ ro_e_build_onrender_js <- function(
   font_family_json <- jsonlite::toJSON(font_family, auto_unbox = TRUE)
   name_color_json <- jsonlite::toJSON(name_color, auto_unbox = TRUE)
   fixed_aspect_json <- jsonlite::toJSON(fixed_aspect, auto_unbox = TRUE)
+  show_legend_json <- jsonlite::toJSON(show_legend, auto_unbox = TRUE)
 
   js <- "function(el) {
       var chart = echarts.getInstanceByDom(el);
@@ -95,6 +100,7 @@ ro_e_build_onrender_js <- function(
       var fontFamily = __FONT_FAMILY__;
       var nameColor = __NAME_COLOR__;
       var fixedAspect = __FIXED_ASPECT__;
+      var showLegend = __SHOW_LEGEND__;
       var lastW = Math.round(el.getBoundingClientRect().width);
 
       // Read current options once: used for axis formatter updates and axis title caching.
@@ -293,7 +299,7 @@ ro_e_build_onrender_js <- function(
         if (Object.keys(opts).length) chart.setOption(opts);
       }
 
-      if (seriesNames.length > 1) {
+      if (showLegend && seriesNames.length > 1) {
         // Place the legend inside el (absolutely positioned at the bottom).
         // el.style.height = W/2 includes the legend height, so the ECharts canvas
         // is resized to W/2 - legendH, leaving the legend row below without overlap.
@@ -398,6 +404,7 @@ ro_e_build_onrender_js <- function(
     }"
 
   js <- gsub("__FIXED_ASPECT__", fixed_aspect_json, js, fixed = TRUE)
+  js <- gsub("__SHOW_LEGEND__", show_legend_json, js, fixed = TRUE)
   js <- gsub("__COLORS__", colors_json, js, fixed = TRUE)
   js <- gsub("__NAMES__", names_json, js, fixed = TRUE)
   js <- gsub("__FONT_FAMILY__", font_family_json, js, fixed = TRUE)
