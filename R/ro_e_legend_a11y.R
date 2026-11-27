@@ -7,6 +7,9 @@
 #' `seriesNames.length > 1` block of that function and expects `container`
 #' (the `.ro-legend-container` div) and `chart` (the ECharts instance) in scope.
 #'
+#' It gives the container `role="group"` and `aria-label="Legenda"`, so screen
+#' readers announce that the user enters the legend.
+#'
 #' What it adds to every `.ro-legend-item`:
 #' - `tabindex="0"` and `role="button"`, so Tab reaches it and it is announced
 #'   as a button.
@@ -31,6 +34,9 @@ ro_e_legend_a11y_js <- function() {
               '.ro-legend-item:focus-visible { outline: 2px solid #333333; outline-offset: 2px; }';
             document.head.appendChild(style);
           }
+
+          container.setAttribute('role', 'group');
+          container.setAttribute('aria-label', 'Legenda');
 
           container.querySelectorAll('.ro-legend-item').forEach(function(item) {
             var name = item.dataset.name;
