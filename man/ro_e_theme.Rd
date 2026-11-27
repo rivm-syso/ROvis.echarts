@@ -63,6 +63,10 @@ for that (recommended).
 \item Horizontal grid lines (value axis); no vertical grid lines.
 \item No axis line or ticks on the value axis.
 \item Custom HTML legend with per-item borders and hover/hidden styles.
+\item Numbers in tooltips and on value axes in Dutch format (\verb{1.000,5}), dates
+on a time axis as \code{dd-mm-yyyy}. A formatter you set yourself, with
+\code{e_tooltip(formatter = ...)} or \code{axisLabel = list(formatter = ...)}, is
+kept.
 }
 }
 

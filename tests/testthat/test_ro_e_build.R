@@ -46,3 +46,30 @@ test_that("ro_e_build_onrender_js can leave legend accessibility out", {
   expect_no_match(js, "ro_e_legend_a11y_js()", fixed = TRUE)
   expect_no_match(js, "__LEGEND_A11Y__", fixed = TRUE)
 })
+
+test_that("ro_e_build_onrender_js keeps a user's axis label formatter (#46)", {
+  js <- ro_e_build_onrender_js("#aa0000", "Alpha", "Verdana", "#154273")
+  expect_match(
+    js,
+    "var userFmt = a.axisLabel && a.axisLabel.formatter;",
+    fixed = TRUE
+  )
+})
+
+test_that("ro_e_build_onrender_js keeps a user's tooltip formatter (#45)", {
+  js <- ro_e_build_onrender_js("#aa0000", "Alpha", "Verdana", "#154273")
+  expect_match(
+    js,
+    "tooltip: userTooltipFmt ? {} : { formatter: tooltipFormatter }",
+    fixed = TRUE
+  )
+})
+
+test_that("ro_e_build_onrender_js formats the tooltip header by axis type (#23)", {
+  js <- ro_e_build_onrender_js("#aa0000", "Alpha", "Verdana", "#154273")
+  expect_match(js, "toLocaleDateString('nl-NL'", fixed = TRUE)
+  expect_match(js, "var catIsY", fixed = TRUE)
+  expect_null(
+    ro_e_theme_list("categorical", "Verdana")$tooltip$axisPointer$axis
+  )
+})

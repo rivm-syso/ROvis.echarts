@@ -25,6 +25,10 @@
 #' * Horizontal grid lines (value axis); no vertical grid lines.
 #' * No axis line or ticks on the value axis.
 #' * Custom HTML legend with per-item borders and hover/hidden styles.
+#' * Numbers in tooltips and on value axes in Dutch format (`1.000,5`), dates
+#'   on a time axis as `dd-mm-yyyy`. A formatter you set yourself, with
+#'   `e_tooltip(formatter = ...)` or `axisLabel = list(formatter = ...)`, is
+#'   kept.
 #'
 #' @param e An echarts4r object (created with [echarts4r::e_charts()]).
 #' @param palette Character. Palette to use for series colors. One of
@@ -345,7 +349,6 @@ ro_e_theme_list <- function(palette, font_family) {
       ),
       axisPointer = list(
         type = "line",
-        axis = "x",
         lineStyle = list(
           color = ro_color("grijs_7"),
           type = "dashed",

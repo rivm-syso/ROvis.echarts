@@ -1,5 +1,12 @@
 # ROvis.echarts (development version)
 
+### :bug: Fixed
+
+- `ro_e_theme()` keeps a value-axis label formatter set by the user, e.g. a percentage axis (#46).
+- `ro_e_theme()` keeps a tooltip formatter set with `e_tooltip(formatter = ...)` (#45).
+- The default tooltip header shows dates on a time axis and years as `2016` (not `2.016`), and
+  no longer swaps header and value on horizontal bar charts (#23).
+
 # ROvis.echarts 0.1.0
 
 First release since `ROvis.echarts` was split out of the `ROvis` monolith into its own
