@@ -194,6 +194,39 @@ data_multi |>
   ro_e_standard(palette = "gender_con")
 ```
 
+### Line chart over time
+
+When the x-axis variable is a `Date`, `echarts4r` uses a time axis. The tooltip then shows the date in Dutch format (`dd-mm-yyyy`).
+
+Give the axis labels your own `formatter` to show month names. `ro_e_standard()` keeps a formatter you set yourself. `minInterval` puts one label on each month, so no label is repeated:
+
+```{r line-date}
+dat_dates <- data.frame(
+  date = seq(as.Date("2024-01-01"), by = "week", length.out = 26),
+  n = round(1000 + 600 * sin(seq(0, 2 * pi, length.out = 26)))
+)
+
+dat_dates |>
+  e_charts(date) |>
+  e_line(n, name = "Cases") |>
+  e_title("Weekly cases over time") |>
+  e_x_axis(
+    name = "Date",
+    minInterval = 30 * 24 * 3600 * 1000, # one month in milliseconds
+    formatter = htmlwidgets::JS(
+      'function (value) {
+    var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
+                  "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    var d = new Date(value);
+    return months[d.getMonth()] + " " + d.getFullYear();
+  }'
+    )
+  ) |>
+  e_y_axis(name = "Value") |>
+  e_tooltip(trigger = "axis") |>
+  ro_e_standard()
+```
+
 ### Grouped trendline
 
 ```{r grouped-trendline}

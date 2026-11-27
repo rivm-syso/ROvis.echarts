@@ -123,21 +123,48 @@ ro_e_build_onrender_js <- function(
           'vertical-align:middle;\"></span>';
       };
 
+      // Which axis holds the categories. On a horizontal bar chart
+      // (e_flip_coords()) that is y, and the values sit on x.
+      var catIsY = !!(opt0.yAxis && opt0.yAxis[0] && opt0.yAxis[0].type === 'category' &&
+        !(opt0.xAxis && opt0.xAxis[0] && opt0.xAxis[0].type === 'category'));
+      var catTitle = catIsY ? yTitle : xTitle;
+      var valTitle = catIsY ? xTitle : yTitle;
+
+      // The value of a data point, read from the value axis dimension.
+      var pointValue = function(p) {
+        var v = p.value;
+        if (!Array.isArray(v)) return v;
+        var enc = p.encode && p.encode[catIsY ? 'x' : 'y'];
+        return v[enc && enc.length ? enc[0] : v.length - 1];
+      };
+
+      // The axis value in the tooltip header: a date on a time axis, the label
+      // as is on a category axis, a Dutch number on a value axis.
+      var axisHeader = function(p) {
+        var type = String(p.axisType || '');
+        if (/time$/.test(type)) {
+          return new Date(p.axisValue).toLocaleDateString('nl-NL',
+            { day: '2-digit', month: '2-digit', year: 'numeric' });
+        }
+        if (/category$/.test(type)) return String(p.axisValueLabel || p.axisValue);
+        return nlFmt(p.axisValue);
+      };
+
       var tooltipFormatter = function(params) {
         var isAxis = Array.isArray(params);
         var out = '';
 
         if (isAxis) {
-          var axVal = nlFmt(params.length ? params[0].axisValue : '');
+          var axVal = params.length ? axisHeader(params[0]) : '';
           out += '<div style=\"margin-bottom:6px;\">' +
-            (xTitle ? xTitle + ': ' : '') + '<b>' + axVal + '</b></div>';
+            (catTitle ? catTitle + ': ' : '') + '<b>' + axVal + '</b></div>';
           params.forEach(function(p) {
             if (p.value == null || p.value === '-') return;
-            var val = nlFmt(Array.isArray(p.value) ? p.value[p.value.length - 1] : p.value);
+            var val = nlFmt(pointValue(p));
             out += '<div style=\"display:flex;align-items:center;margin:2px 0;\">' +
               marker(p.color) +
               '<span>' + p.seriesName + ': <b>' + val + '</b>' +
-              (yTitle ? ' ' + yTitle.toLowerCase() : '') + '</span></div>';
+              (valTitle ? ' ' + valTitle.toLowerCase() : '') + '</span></div>';
           });
         } else {
           var col = params.color || palette[params.seriesIndex % palette.length];
@@ -145,17 +172,20 @@ ro_e_build_onrender_js <- function(
             marker(col) + '<b>' + params.seriesName + '</b></div>';
           if (params.name) {
             out += '<div style=\"margin:2px 0;\">' +
-              (xTitle ? xTitle + ': ' : '') + '<b>' + params.name + '</b></div>';
+              (catTitle ? catTitle + ': ' : '') + '<b>' + params.name + '</b></div>';
           }
-          var val = nlFmt(Array.isArray(params.value)
-            ? params.value[params.value.length - 1] : params.value);
+          var val = nlFmt(pointValue(params));
           out += '<div style=\"margin:2px 0;\">' +
-            (yTitle ? yTitle + ': ' : '') + '<b>' + val + '</b></div>';
+            (valTitle ? valTitle + ': ' : '') + '<b>' + val + '</b></div>';
         }
 
         return '<div style=\"font-family:' + fontFamily +
           ';font-size:13px;color:#000000;line-height:1.5;\">' + out + '</div>';
       };
+
+      // A formatter the user set with e_tooltip(formatter = ...) or
+      // e_*_axis(axisLabel = list(formatter = ...)) is kept; ours is the default.
+      var userTooltipFmt = !!(opt0.tooltip && opt0.tooltip[0] && opt0.tooltip[0].formatter);
 
       // Build axis label formatter updates from opt0 so we can merge them into
       // the single setOption call below.
@@ -163,7 +193,8 @@ ro_e_build_onrender_js <- function(
       ['xAxis', 'yAxis'].forEach(function(k) {
         var axes = opt0[k] || [];
         var upd = axes.map(function(a) {
-          var u = (a.type === 'value' || a.type === 'log' || !a.type)
+          var userFmt = a.axisLabel && a.axisLabel.formatter;
+          var u = (!userFmt && (a.type === 'value' || a.type === 'log' || !a.type))
             ? { axisLabel: { formatter: nlFmt } } : {};
           // Apply name styles by physical axis position, not axis type.
           // e_flip_coords() moves the value axis to x and the category axis to y,
@@ -214,7 +245,7 @@ ro_e_build_onrender_js <- function(
       chart.setOption(Object.assign(
         {
           legend: { show: false },
-          tooltip: { formatter: tooltipFormatter },
+          tooltip: userTooltipFmt ? {} : { formatter: tooltipFormatter },
           series: seriesEmphasis,
           stateAnimation: { duration: 0 }
         },
