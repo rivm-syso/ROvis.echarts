@@ -1,5 +1,9 @@
 # ROvis.echarts (development version)
 
+### :sparkles: Added
+
+- The `ro_e_theme()` legend is announced as a group named "Legenda" by screen readers (#61).
+
 # ROvis.echarts 0.1.0
 
 First release since `ROvis.echarts` was split out of the `ROvis` monolith into its own

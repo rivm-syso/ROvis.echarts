@@ -1,5 +1,10 @@
 test_that("ro_e_legend_a11y_js adds focus, role, label, state and key handling", {
   js <- ro_e_legend_a11y_js()
+  expect_match(
+    js,
+    "container.setAttribute('aria-label', 'Legenda')",
+    fixed = TRUE
+  )
   expect_match(js, "tabindex", fixed = TRUE)
   expect_match(js, "role', 'button'", fixed = TRUE)
   expect_match(js, "Legenda: ", fixed = TRUE)

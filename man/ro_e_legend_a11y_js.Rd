@@ -16,6 +16,9 @@ be switched off or changed on its own. The snippet runs inside the
 (the \code{.ro-legend-container} div) and \code{chart} (the ECharts instance) in scope.
 }
 \details{
+It gives the container \code{role="group"} and \code{aria-label="Legenda"}, so screen
+readers announce that the user enters the legend.
+
 What it adds to every \code{.ro-legend-item}:
 \itemize{
 \item \code{tabindex="0"} and \code{role="button"}, so Tab reaches it and it is announced
